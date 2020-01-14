@@ -7,6 +7,7 @@ php:
 
 env:
     - COMPOSER_NO_INTERACTION=1
+    - CC_TEST_REPORTER_ID=ce40c1d841287e2b378e50a8e96eb7de609b933e68f247177e705c80546bc998
 
 cache:
     directories:
@@ -15,7 +16,16 @@ cache:
 install:
     - travis_retry composer install --no-scripts --no-suggest
 
+before_script:
+    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+    - chmod +x ./cc-test-reporter
+    - ./cc-test-reporter before-build
+
 script:
     - composer validate --strict
     - find src/ tests/ -type f -name '*.php' -print0 | xargs -0 -L 1 -P 4 php -l
     - vendor/bin/phpunit
+    - bundle exec rspec
+
+after_script:
+    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
