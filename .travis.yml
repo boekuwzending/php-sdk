@@ -7,7 +7,6 @@ php:
 
 env:
     global:
-        - COMPOSER_NO_INTERACTION=1
         - CC_TEST_REPORTER_ID=ce40c1d841287e2b378e50a8e96eb7de609b933e68f247177e705c80546bc998
 rvm:
     - 2.2.0
@@ -17,7 +16,7 @@ cache:
         - "$HOME/.composer/cache"
 
 install:
-    - travis_retry composer install --no-scripts --no-suggest
+    - travis_retry composer install --no-scripts --no-suggest --no-interaction
 
 before_script:
     - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
