@@ -11,6 +11,8 @@ A PHP library for communicating with the Boekuwzending.com API.
 * API credentials, [send us an email](mailto:mail@boekuwzending.com)
 * PHP 7.1 or higher
 
+[![Build Status](https://travis-ci.org/boekuwzending/php-sdk.svg?branch=master)](https://travis-ci.org/boekuwzending/php-sdk)
+
 ## Composer installation
 Install the API client using [Composer](http://getcomposer.org/doc/00-intro.md). 
 
