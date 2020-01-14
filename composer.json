@@ -1,0 +1,29 @@
+{
+    "name": "boekuwzending/php-sdk",
+    "description": "Boekuwzending API client for PHP.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Boekuwzending.com B.V.",
+            "email": "mail@boekuwzending.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Boekuwzending\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Boekuwzending\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "ext-json": "*",
+        "symfony/http-client": "^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    }
+}
