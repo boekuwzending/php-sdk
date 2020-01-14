@@ -21,7 +21,7 @@ class LabelEndpoint extends AbstractEndpoint
      * @throws AuthorizationFailedException
      * @throws RequestFailedException
      */
-    public function get(string $id)
+    public function get(string $id): Label
     {
         $response = $this->client->request('/labels/' . $id, Client::METHOD_GET);
 
