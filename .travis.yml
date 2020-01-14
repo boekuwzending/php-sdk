@@ -6,8 +6,11 @@ php:
     - 7.3
 
 env:
-    - COMPOSER_NO_INTERACTION=1
-    - CC_TEST_REPORTER_ID=ce40c1d841287e2b378e50a8e96eb7de609b933e68f247177e705c80546bc998
+    global:
+        - COMPOSER_NO_INTERACTION=1
+        - CC_TEST_REPORTER_ID=ce40c1d841287e2b378e50a8e96eb7de609b933e68f247177e705c80546bc998
+rvm:
+    - 2.2.0
 
 cache:
     directories:
