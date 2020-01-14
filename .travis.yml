@@ -1,0 +1,25 @@
+language: php
+
+dist: xenial
+
+sudo: false
+
+php:
+    - 7.1
+    - 7.2
+    - 7.3
+
+env:
+    - COMPOSER_NO_INTERACTION=1
+
+cache:
+    directories:
+        - "$HOME/.composer/cache"
+
+install:
+    - travis_retry composer install --no-scripts --no-suggest
+
+script:
+    - composer validate --strict
+    - find src/ tests/ -type f -name '*.php' -print0 | xargs -0 -L 1 -P 4 php -l
+    - vendor/bin/phpunit
