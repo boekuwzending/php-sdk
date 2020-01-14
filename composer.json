@@ -8,6 +8,8 @@
             "email": "mail@boekuwzending.com"
         }
     ],
+    "homepage": "https://www.boekuwzending.com/",
+    "license": "BSD-2-Clause",
     "autoload": {
         "psr-4": {
             "Boekuwzending\\": "src/"
