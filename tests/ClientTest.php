@@ -89,7 +89,7 @@ class ClientTest extends TestCase
     {
         // Arrange
         $this->expectException(NoCredentialsException::class);
-        $this->expectDeprecationMessage('API credentials not specified. Use Client::setCredentials');
+        $this->expectExceptionMessage('API credentials not specified. Use Client::setCredentials');
 
         // Act
         $client = new Client($this->httpClientMock);
