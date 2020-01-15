@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Boekuwzending;
 
+use Boekuwzending\Serializer\Serializer;
 use Symfony\Component\HttpClient\HttpClient;
 
 /**
@@ -25,7 +26,7 @@ class ClientFactory
     ): Client {
         $baseUri = $environment === Client::ENVIRONMENT_STAGING ? Client::URL_STAGING : Client::URL_LIVE;
 
-        $client = new Client(HttpClient::createForBaseUri($baseUri));
+        $client = new Client(HttpClient::createForBaseUri($baseUri), new Serializer());
         $client->setCredentials($clientId, $clientSecret);
 
         return $client;

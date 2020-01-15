@@ -7,6 +7,7 @@ namespace Boekuwzending\Tests\Endpoints;
 use Boekuwzending\Client;
 use Boekuwzending\Endpoints\LabelEndpoint;
 use Boekuwzending\Resource\Label;
+use Boekuwzending\Serializer\Serializer;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -19,6 +20,16 @@ class LabelEndpointTest extends TestCase
      * @var Client|MockObject
      */
     private $clientMock;
+
+    /**
+     * @var Serializer|MockObject
+     */
+    private $serializerMock;
+
+    /**
+     * @var Label|MockObject
+     */
+    private $labelMock;
 
     public function testGet()
     {
@@ -33,19 +44,23 @@ class LabelEndpointTest extends TestCase
             ->with('/labels/' . $id, 'GET')
             ->willReturn($response);
 
+        $this->serializerMock
+            ->method('deserialize')
+            ->with($response, Label::class)
+            ->willReturn($this->labelMock);
+
         // Act
-        $endpoint = new LabelEndpoint($this->clientMock);
+        $endpoint = new LabelEndpoint($this->clientMock, $this->serializerMock);
         $response = $endpoint->get($id);
 
         // Assert
-        $this->assertInstanceOf(Label::class, $response);
-        $this->assertSame($id, $response->getId());
-        $this->assertSame($waybill, $response->getWaybill());
-        $this->assertSame($reference, $response->getReference());
+        $this->assertSame($this->labelMock, $response);
     }
 
     public function setUp()
     {
         $this->clientMock = $this->createMock(Client::class);
+        $this->serializerMock = $this->createMock(Serializer::class);
+        $this->labelMock = $this->createMock(Label::class);
     }
 }

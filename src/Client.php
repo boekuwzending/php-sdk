@@ -11,6 +11,7 @@ use Boekuwzending\Endpoints\TrackingEndpoint;
 use Boekuwzending\Exception\AuthorizationFailedException;
 use Boekuwzending\Exception\NoCredentialsException;
 use Boekuwzending\Exception\RequestFailedException;
+use Boekuwzending\Serializer\Serializer;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
@@ -75,12 +76,13 @@ class Client
      * BuzApiClient constructor.
      *
      * @param HttpClientInterface $httpClient
+     * @param Serializer          $serializer
      */
-    public function __construct(HttpClientInterface $httpClient = null)
+    public function __construct(HttpClientInterface $httpClient, Serializer $serializer)
     {
         $this->httpClient = $httpClient;
 
-        $this->registerEndpoints();
+        $this->registerEndpoints($serializer);
     }
 
     /**
@@ -126,12 +128,12 @@ class Client
         }
     }
 
-    private function registerEndpoints(): void
+    private function registerEndpoints(Serializer $serializer): void
     {
-        $this->me = new MeEndpoint($this);
-        $this->shipment = new ShipmentEndpoint($this);
-        $this->tracking = new TrackingEndpoint($this);
-        $this->label = new LabelEndpoint($this);
+        $this->me = new MeEndpoint($this, $serializer);
+        $this->shipment = new ShipmentEndpoint($this, $serializer);
+        $this->tracking = new TrackingEndpoint($this, $serializer);
+        $this->label = new LabelEndpoint($this, $serializer);
     }
 
     /**

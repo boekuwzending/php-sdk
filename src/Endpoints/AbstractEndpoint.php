@@ -26,11 +26,12 @@ abstract class AbstractEndpoint
     /**
      * AbstractEndpoint constructor.
      *
-     * @param Client $client
+     * @param Client     $client
+     * @param Serializer $serializer
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, Serializer $serializer)
     {
         $this->client = $client;
-        $this->serializer = new Serializer();
+        $this->serializer = $serializer;
     }
 }

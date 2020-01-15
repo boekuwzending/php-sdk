@@ -7,6 +7,7 @@ namespace Boekuwzending\Tests;
 use Boekuwzending\Client;
 use Boekuwzending\Exception\AuthorizationFailedException;
 use Boekuwzending\Exception\NoCredentialsException;
+use Boekuwzending\Serializer\Serializer;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\Exception\TransportException;
@@ -32,6 +33,11 @@ class ClientTest extends TestCase
      * @var MockObject|ResponseInterface
      */
     private $responseMock;
+
+    /**
+     * @var Serializer|MockObject
+     */
+    private $serializerMock;
 
     public function testAuthorization(): void
     {
@@ -77,7 +83,7 @@ class ClientTest extends TestCase
             ->willReturn('{"foo":"bar"}');
 
         // Act
-        $client = new Client($this->httpClientMock);
+        $client = new Client($this->httpClientMock, $this->serializerMock);
         $client->setCredentials($clientId, $clientSecret);
         $response = $client->request($endpoint, 'GET');
 
@@ -92,7 +98,7 @@ class ClientTest extends TestCase
         $this->expectExceptionMessage('API credentials not specified. Use Client::setCredentials');
 
         // Act
-        $client = new Client($this->httpClientMock);
+        $client = new Client($this->httpClientMock, $this->serializerMock);
         $client->request('/foo/bar', 'GET');
     }
 
@@ -121,7 +127,7 @@ class ClientTest extends TestCase
         $this->expectException(AuthorizationFailedException::class);
 
         // Act
-        $client = new Client($this->httpClientMock);
+        $client = new Client($this->httpClientMock, $this->serializerMock);
         $client->setCredentials($clientId, $clientSecret);
         $client->request('/foo/bar', 'GET');
     }
@@ -133,5 +139,6 @@ class ClientTest extends TestCase
         $this->httpClientMock = $this->createMock(HttpClientInterface::class);
         $this->authorizationResponseMock = $this->createMock(ResponseInterface::class);
         $this->responseMock = $this->createMock(ResponseInterface::class);
+        $this->serializerMock = $this->createMock(Serializer::class);
     }
 }
