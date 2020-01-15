@@ -15,8 +15,6 @@ use Boekuwzending\Serializer\Serializer;
  */
 class ShipmentEndpoint extends AbstractEndpoint
 {
-    private const URL = '/shipments';
-
     /**
      * @param string $id
      *
@@ -39,8 +37,10 @@ class ShipmentEndpoint extends AbstractEndpoint
      */
     public function create(Shipment $shipment): void
     {
-        $serializer = new Serializer();
-
-        $this->client->request('/shipments', Client::METHOD_POST, $serializer->serialize($shipment));
+        $this->client->request(
+            '/shipments',
+            Client::METHOD_POST,
+            $this->serializer->serialize($shipment)
+        );
     }
 }

@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace Boekuwzending\Tests\Endpoints;
 
 use Boekuwzending\Client;
-use Boekuwzending\Endpoints\LabelEndpoint;
-use Boekuwzending\Resource\Label;
+use Boekuwzending\Endpoints\ShipmentEndpoint;
+use Boekuwzending\Endpoints\TrackingEndpoint;
+use Boekuwzending\Resource\Shipment;
+use Boekuwzending\Resource\Tracking;
 use Boekuwzending\Serializer\Serializer;
 use Boekuwzending\Tests\FakerTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class LabelEndpointTest.
+ * Class TrackingEndpointTest.
  */
-class LabelEndpointTest extends TestCase
+class TrackingEndpointTest extends TestCase
 {
     use FakerTrait;
 
@@ -30,40 +32,40 @@ class LabelEndpointTest extends TestCase
     private $serializerMock;
 
     /**
-     * @var Label|MockObject
+     * @var Tracking|MockObject
      */
-    private $labelMock;
+    private $trackingMock;
 
     public function testGet()
     {
         // Arrange
         $id = $this->getFaker()->uuid;
-        $waybill = $this->getFaker()->word;
-        $reference = $this->getFaker()->text;
-        $response = ['id' => $id, 'waybill' => $waybill, 'reference' => $reference];
+        $apiResponse = ['foo' => 'bar'];
 
         $this->clientMock
             ->method('request')
-            ->with('/labels/' . $id, 'GET')
-            ->willReturn($response);
+            ->with(sprintf('/trackings/%s', $id), 'GET')
+            ->willReturn($apiResponse);
 
         $this->serializerMock
             ->method('deserialize')
-            ->with($response, Label::class)
-            ->willReturn($this->labelMock);
+            ->with($apiResponse, Tracking::class)
+            ->willReturn($this->trackingMock);
 
         // Act
-        $endpoint = new LabelEndpoint($this->clientMock, $this->serializerMock);
+        $endpoint = new TrackingEndpoint($this->clientMock, $this->serializerMock);
         $response = $endpoint->get($id);
 
         // Assert
-        $this->assertSame($this->labelMock, $response);
+        $this->assertSame($this->trackingMock, $response);
     }
 
     public function setUp()
     {
+        parent::setUp();
+
         $this->clientMock = $this->createMock(Client::class);
         $this->serializerMock = $this->createMock(Serializer::class);
-        $this->labelMock = $this->createMock(Label::class);
+        $this->trackingMock = $this->createMock(Tracking::class);
     }
 }
