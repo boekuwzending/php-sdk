@@ -146,7 +146,7 @@ class Client
         }
 
         try {
-            $response = $this->httpClient->request('POST', self::URL_LIVE.'/token', [
+            $response = $this->httpClient->request('POST', '/token', [
                 'body' => [
                     'grant_type' => 'client_credentials',
                     'client_id' => $this->clientId,
