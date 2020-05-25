@@ -29,8 +29,8 @@ class Client
     public const ENVIRONMENT_LIVE = 'live';
     public const ENVIRONMENT_STAGING = 'staging';
 
-    public const URL_LIVE = 'https://api.mijn.boekuwzending.com';
-    public const URL_STAGING = 'https://api.staging.mijn.boekuwzending.com';
+    public const URL_LIVE = 'https://api.boekuwzending.com';
+    public const URL_STAGING = 'https://api.staging.boekuwzending.com';
 
     /**
      * @var HttpClientInterface
