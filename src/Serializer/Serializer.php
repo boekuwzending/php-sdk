@@ -11,6 +11,7 @@ use Boekuwzending\Resource\DeliveryInstruction;
 use Boekuwzending\Resource\DispatchInstruction;
 use Boekuwzending\Resource\Item;
 use Boekuwzending\Resource\Label;
+use Boekuwzending\Resource\Me;
 use Boekuwzending\Resource\Shipment;
 use Boekuwzending\Resource\Tracking;
 use Boekuwzending\Resource\TrackingLine;
@@ -37,6 +38,7 @@ class Serializer implements SerializerInterface
             DispatchInstruction::class => new InstructionSerializer(),
             DeliveryInstruction::class => new InstructionSerializer(),
             Item::class => new ItemSerializer(),
+            Me::class => new MeSerializer(),
             Tracking::class => new TrackingSerializer(),
             TrackingLine::class => new TrackingLineSerializer(),
             Label::class => new LabelSerializer(),
