@@ -137,21 +137,30 @@ class Client
     }
 
     /**
+     * @param array $scopes
      * @throws AuthorizationFailedException
+     *
+     * @return string
      */
-    private function authorize(): void
+    public function authorize(array $scopes = []): string
     {
         if (empty($this->clientId) || empty($this->clientSecret)) {
             throw new NoCredentialsException('API credentials not specified. Use Client::setCredentials');
         }
 
+        $body = [
+            'grant_type' => 'client_credentials',
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+        ];
+
+        if(!empty($scopes)) {
+            $body['scopes'] = implode(',', $scopes);
+        }
+
         try {
             $response = $this->httpClient->request('POST', '/token', [
-                'body' => [
-                    'grant_type' => 'client_credentials',
-                    'client_id' => $this->clientId,
-                    'client_secret' => $this->clientSecret,
-                ],
+                'body' => $body,
             ]);
         } catch (TransportExceptionInterface $e) {
             throw new AuthorizationFailedException();
@@ -164,5 +173,7 @@ class Client
         }
 
         $this->accessToken = $response['access_token'];
+
+        return $this->accessToken;
     }
 }
