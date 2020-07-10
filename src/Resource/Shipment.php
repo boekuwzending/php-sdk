@@ -1,10 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Boekuwzending\Resource;
-
-use Boekuwzending\Exception\InvalidResourceArgumentException;
 
 /**
  * Class ShipmentMessage.
@@ -43,12 +39,12 @@ class Shipment
     protected $incoTerms;
 
     /**
-     * @var Contact
+     * @var Contact|null
      */
     protected $shipFromContact;
 
     /**
-     * @var Address
+     * @var Address|null
      */
     protected $shipFromAddress;
 
@@ -78,7 +74,7 @@ class Shipment
     protected $dispatch;
 
     /**
-     * @var DeliveryInstruction
+     * @var DeliveryInstruction|null
      */
     protected $delivery;
 
@@ -88,77 +84,19 @@ class Shipment
     protected $items;
 
     /**
-     * Shipment constructor.
-     *
-     * @param string              $transportType
-     * @param Contact             $shipFromContact
-     * @param Address             $shipFromAddress
-     * @param Contact             $shipToContact
-     * @param Address             $shipToAddress
-     * @param DispatchInstruction $dispatch
-     * @param DeliveryInstruction $delivery
-     * @param array               $items
-     * @param string|null         $invoiceReference
-     * @param string|null         $incoTerms
-     * @param string|null         $dpdNumber
-     * @param string|null         $dpdDepotCode
-     *
-     * @throws InvalidResourceArgumentException
-     */
-    public function __construct(
-        string $transportType,
-        Contact $shipFromContact,
-        Address $shipFromAddress,
-        Contact $shipToContact,
-        Address $shipToAddress,
-        DispatchInstruction $dispatch,
-        DeliveryInstruction $delivery,
-        array $items,
-        string $invoiceReference = null,
-        string $incoTerms = null,
-        string $dpdNumber = null,
-        string $dpdDepotCode = null
-    ) {
-        $this->invoiceReference = $invoiceReference;
-        $this->transportType = strtolower($transportType);
-        $this->incoTerms = $incoTerms ? strtolower($incoTerms) : null;
-        $this->shipFromContact = $shipFromContact;
-        $this->shipFromAddress = $shipFromAddress;
-        $this->shipToContact = $shipToContact;
-        $this->shipToAddress = $shipToAddress;
-        $this->dispatch = $dispatch;
-        $this->delivery = $delivery;
-        $this->items = $items;
-        $this->dpdNumber = $dpdNumber;
-        $this->dpdDepotCode = $dpdDepotCode;
-
-        if (strlen($this->invoiceReference) > 35) {
-            throw new InvalidResourceArgumentException('InvoiceReference must be 35 characters or shorter.');
-        }
-
-        if (!in_array($this->transportType, self::VALID_TRANSPORT_TYPES, true)) {
-            throw new InvalidResourceArgumentException(
-                sprintf('TransportType must be one of: %s', implode(', ', self::VALID_TRANSPORT_TYPES))
-            );
-        }
-
-        if (!empty($this->incoTerms) && !in_array($this->incoTerms, self::VALID_INCO_TERMS, true)) {
-            throw new InvalidResourceArgumentException(
-                sprintf('IncoTerms must be one of: %s', implode(', ', self::VALID_INCO_TERMS))
-            );
-        }
-
-        if (!empty($this->dpdNumber) && strlen($this->dpdNumber) > 17) {
-            throw new InvalidResourceArgumentException('DpdNumber must be 17 characters or shorter.');
-        }
-    }
-
-    /**
      * @return string|null
      */
     public function getInvoiceReference(): ?string
     {
         return $this->invoiceReference;
+    }
+
+    /**
+     * @param string|null $invoiceReference
+     */
+    public function setInvoiceReference(?string $invoiceReference): void
+    {
+        $this->invoiceReference = $invoiceReference;
     }
 
     /**
@@ -170,6 +108,14 @@ class Shipment
     }
 
     /**
+     * @param string $transportType
+     */
+    public function setTransportType(string $transportType): void
+    {
+        $this->transportType = $transportType;
+    }
+
+    /**
      * @return string|null
      */
     public function getIncoTerms(): ?string
@@ -178,19 +124,43 @@ class Shipment
     }
 
     /**
-     * @return Contact
+     * @param string|null $incoTerms
      */
-    public function getShipFromContact(): Contact
+    public function setIncoTerms(?string $incoTerms): void
+    {
+        $this->incoTerms = $incoTerms;
+    }
+
+    /**
+     * @return Contact|null
+     */
+    public function getShipFromContact(): ?Contact
     {
         return $this->shipFromContact;
     }
 
     /**
-     * @return Address
+     * @param Contact|null $shipFromContact
      */
-    public function getShipFromAddress(): Address
+    public function setShipFromContact(?Contact $shipFromContact): void
+    {
+        $this->shipFromContact = $shipFromContact;
+    }
+
+    /**
+     * @return Address|null
+     */
+    public function getShipFromAddress(): ?Address
     {
         return $this->shipFromAddress;
+    }
+
+    /**
+     * @param Address|null $shipFromAddress
+     */
+    public function setShipFromAddress(?Address $shipFromAddress): void
+    {
+        $this->shipFromAddress = $shipFromAddress;
     }
 
     /**
@@ -202,6 +172,14 @@ class Shipment
     }
 
     /**
+     * @param Contact $shipToContact
+     */
+    public function setShipToContact(Contact $shipToContact): void
+    {
+        $this->shipToContact = $shipToContact;
+    }
+
+    /**
      * @return Address
      */
     public function getShipToAddress(): Address
@@ -210,27 +188,11 @@ class Shipment
     }
 
     /**
-     * @return DispatchInstruction
+     * @param Address $shipToAddress
      */
-    public function getDispatch(): DispatchInstruction
+    public function setShipToAddress(Address $shipToAddress): void
     {
-        return $this->dispatch;
-    }
-
-    /**
-     * @return DeliveryInstruction
-     */
-    public function getDelivery(): DeliveryInstruction
-    {
-        return $this->delivery;
-    }
-
-    /**
-     * @return Item[]
-     */
-    public function getItems(): array
-    {
-        return $this->items;
+        $this->shipToAddress = $shipToAddress;
     }
 
     /**
@@ -242,10 +204,74 @@ class Shipment
     }
 
     /**
+     * @param string|null $dpdNumber
+     */
+    public function setDpdNumber(?string $dpdNumber): void
+    {
+        $this->dpdNumber = $dpdNumber;
+    }
+
+    /**
      * @return string|null
      */
     public function getDpdDepotCode(): ?string
     {
         return $this->dpdDepotCode;
+    }
+
+    /**
+     * @param string|null $dpdDepotCode
+     */
+    public function setDpdDepotCode(?string $dpdDepotCode): void
+    {
+        $this->dpdDepotCode = $dpdDepotCode;
+    }
+
+    /**
+     * @return DispatchInstruction
+     */
+    public function getDispatch(): DispatchInstruction
+    {
+        return $this->dispatch;
+    }
+
+    /**
+     * @param DispatchInstruction $dispatch
+     */
+    public function setDispatch(DispatchInstruction $dispatch): void
+    {
+        $this->dispatch = $dispatch;
+    }
+
+    /**
+     * @return DeliveryInstruction|null
+     */
+    public function getDelivery(): ?DeliveryInstruction
+    {
+        return $this->delivery;
+    }
+
+    /**
+     * @param DeliveryInstruction|null $delivery
+     */
+    public function setDelivery(?DeliveryInstruction $delivery): void
+    {
+        $this->delivery = $delivery;
+    }
+
+    /**
+     * @return Item[]
+     */
+    public function getItems(): array
+    {
+        return $this->items;
+    }
+
+    /**
+     * @param Item[] $items
+     */
+    public function setItems(array $items): void
+    {
+        $this->items = $items;
     }
 }

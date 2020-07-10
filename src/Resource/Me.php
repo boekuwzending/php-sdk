@@ -25,20 +25,6 @@ class Me
     private $id;
 
     /**
-     * Me constructor.
-     *
-     * @param string $number
-     * @param string $name
-     * @param string $id
-     */
-    public function __construct(string $number, string $name, string $id)
-    {
-        $this->number = $number;
-        $this->name = $name;
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function getNumber(): string
@@ -47,11 +33,27 @@ class Me
     }
 
     /**
+     * @param string $number
+     */
+    public function setNumber(string $number): void
+    {
+        $this->number = $number;
+    }
+
+    /**
      * @return string
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
     /**

@@ -33,41 +33,19 @@ abstract class Instruction
     protected $timeWindowEnd;
 
     /**
-     * Instruction constructor.
-     *
-     * @param string|null            $instructions
-     * @param string|null            $reference
-     * @param DateTimeInterface|null $timeWindowBegin
-     * @param DateTimeInterface|null $timeWindowEnd
-     *
-     * @throws InvalidResourceArgumentException
-     */
-    public function __construct(
-        ?string $instructions,
-        ?string $reference,
-        ?DateTimeInterface $timeWindowBegin,
-        ?DateTimeInterface $timeWindowEnd
-    ) {
-        $this->instructions = $instructions;
-        $this->reference = $reference;
-        $this->timeWindowBegin = $timeWindowBegin;
-        $this->timeWindowEnd = $timeWindowEnd;
-
-        if (!empty($this->instructions) && strlen($this->instructions) > 75) {
-            throw new InvalidResourceArgumentException('Dispatch and delivery instructions street must be 75 characters or shorter.');
-        }
-
-        if (!empty($this->reference) && strlen($this->reference) > 75) {
-            throw new InvalidResourceArgumentException('Dispatch and delivery reference street must be 75 characters or shorter.');
-        }
-    }
-
-    /**
      * @return string|null
      */
     public function getInstructions(): ?string
     {
         return $this->instructions;
+    }
+
+    /**
+     * @param string|null $instructions
+     */
+    public function setInstructions(?string $instructions): void
+    {
+        $this->instructions = $instructions;
     }
 
     /**
@@ -79,6 +57,14 @@ abstract class Instruction
     }
 
     /**
+     * @param string|null $reference
+     */
+    public function setReference(?string $reference): void
+    {
+        $this->reference = $reference;
+    }
+
+    /**
      * @return DateTimeInterface|null
      */
     public function getTimeWindowBegin(): ?DateTimeInterface
@@ -87,10 +73,26 @@ abstract class Instruction
     }
 
     /**
+     * @param DateTimeInterface|null $timeWindowBegin
+     */
+    public function setTimeWindowBegin(?DateTimeInterface $timeWindowBegin): void
+    {
+        $this->timeWindowBegin = $timeWindowBegin;
+    }
+
+    /**
      * @return DateTimeInterface|null
      */
     public function getTimeWindowEnd(): ?DateTimeInterface
     {
         return $this->timeWindowEnd;
+    }
+
+    /**
+     * @param DateTimeInterface|null $timeWindowEnd
+     */
+    public function setTimeWindowEnd(?DateTimeInterface $timeWindowEnd): void
+    {
+        $this->timeWindowEnd = $timeWindowEnd;
     }
 }

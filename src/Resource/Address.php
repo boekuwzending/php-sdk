@@ -12,12 +12,12 @@ use Boekuwzending\Exception\InvalidResourceArgumentException;
 class Address
 {
     /**
-     * @var string|null
+     * @var string
      */
     protected $street;
 
     /**
-     * @var string|null
+     * @var string
      */
     protected $number;
 
@@ -49,74 +49,48 @@ class Address
     /**
      * @var bool
      */
-    private $privateAddress;
+    private $privateAddress = true;
 
     /**
-     * @var bool|null
+     * @var bool
      */
-    private $forkliftOrLoadingDockAvailable;
+    private $forkliftOrLoadingDockAvailable = false;
 
     /**
-     * @var bool|null
+     * @var bool
      */
-    private $accessibleWithTrailer;
-
-    /**
-     * Address constructor.
-     *
-     * @param string    $postcode
-     * @param string    $city
-     * @param string    $countryCode
-     * @param bool      $privateAddress
-     * @param string    $street
-     * @param string    $number
-     * @param string    $numberAddition
-     * @param string    $addressLine2
-     * @param bool|null $forkliftOrLoadingDockAvailable
-     * @param bool|null $accessibleWithTrailer
-     *
-     * @throws InvalidResourceArgumentException
-     */
-    public function __construct(
-        string $postcode,
-        string $city,
-        string $countryCode,
-        bool $privateAddress,
-        string $street = null,
-        string $number = null,
-        string $numberAddition = null,
-        string $addressLine2 = null,
-        bool $forkliftOrLoadingDockAvailable = null,
-        bool $accessibleWithTrailer = null
-    ) {
-        $this->street = $street;
-        $this->number = $number;
-        $this->numberAddition = $numberAddition;
-        $this->postcode = $postcode;
-        $this->city = $city;
-        $this->countryCode = $countryCode;
-        $this->addressLine2 = $addressLine2;
-        $this->privateAddress = $privateAddress;
-        $this->forkliftOrLoadingDockAvailable = $forkliftOrLoadingDockAvailable;
-        $this->accessibleWithTrailer = $accessibleWithTrailer;
-
-        $this->validate();
-    }
+    private $accessibleWithTrailer = false;
 
     /**
      * @return string|null
      */
-    public function getStreet(): ?string
+    public function getStreet(): string
     {
         return $this->street;
     }
 
     /**
+     * @param string|null $street
+     */
+    public function setStreet(string $street): void
+    {
+        $this->street = $street;
+    }
+
+    /**
      * @return string|null
      */
-    public function getNumber(): ?string
+    public function getNumber(): string
     {
         return $this->number;
+    }
+
+    /**
+     * @param string|null $number
+     */
+    public function setNumber(string $number): void
+    {
+        $this->number = $number;
     }
 
     /**
@@ -128,11 +102,27 @@ class Address
     }
 
     /**
+     * @param string|null $numberAddition
+     */
+    public function setNumberAddition(?string $numberAddition): void
+    {
+        $this->numberAddition = $numberAddition;
+    }
+
+    /**
      * @return string
      */
     public function getPostcode(): string
     {
         return $this->postcode;
+    }
+
+    /**
+     * @param string $postcode
+     */
+    public function setPostcode(string $postcode): void
+    {
+        $this->postcode = $postcode;
     }
 
     /**
@@ -144,11 +134,27 @@ class Address
     }
 
     /**
+     * @param string $city
+     */
+    public function setCity(string $city): void
+    {
+        $this->city = $city;
+    }
+
+    /**
      * @return string
      */
     public function getCountryCode(): string
     {
         return $this->countryCode;
+    }
+
+    /**
+     * @param string $countryCode
+     */
+    public function setCountryCode(string $countryCode): void
+    {
+        $this->countryCode = $countryCode;
     }
 
     /**
@@ -160,6 +166,14 @@ class Address
     }
 
     /**
+     * @param string|null $addressLine2
+     */
+    public function setAddressLine2(?string $addressLine2): void
+    {
+        $this->addressLine2 = $addressLine2;
+    }
+
+    /**
      * @return bool
      */
     public function isPrivateAddress(): bool
@@ -168,19 +182,43 @@ class Address
     }
 
     /**
-     * @return bool|null
+     * @param bool $privateAddress
      */
-    public function isForkliftOrLoadingDockAvailable(): ?bool
+    public function setPrivateAddress(bool $privateAddress): void
+    {
+        $this->privateAddress = $privateAddress;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getForkliftOrLoadingDockAvailable(): bool
     {
         return $this->forkliftOrLoadingDockAvailable;
     }
 
     /**
-     * @return bool|null
+     * @param bool $forkliftOrLoadingDockAvailable
      */
-    public function isAccessibleWithTrailer(): ?bool
+    public function setForkliftOrLoadingDockAvailable(bool $forkliftOrLoadingDockAvailable): void
+    {
+        $this->forkliftOrLoadingDockAvailable = $forkliftOrLoadingDockAvailable;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAccessibleWithTrailer(): bool
     {
         return $this->accessibleWithTrailer;
+    }
+
+    /**
+     * @param bool $accessibleWithTrailer
+     */
+    public function setAccessibleWithTrailer(bool $accessibleWithTrailer): void
+    {
+        $this->accessibleWithTrailer = $accessibleWithTrailer;
     }
 
     /**
