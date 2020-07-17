@@ -8,7 +8,6 @@ use Boekuwzending\Client;
 use Boekuwzending\Exception\AuthorizationFailedException;
 use Boekuwzending\Exception\RequestFailedException;
 use Boekuwzending\Resource\Shipment;
-use Boekuwzending\Serializer\Serializer;
 
 /**
  * Class ShipmentsEndpoint.
@@ -32,15 +31,18 @@ class ShipmentEndpoint extends AbstractEndpoint
     /**
      * @param Shipment $shipment
      *
+     * @return Shipment
      * @throws AuthorizationFailedException
      * @throws RequestFailedException
      */
-    public function create(Shipment $shipment): void
+    public function create(Shipment $shipment): Shipment
     {
-        $this->client->request(
+        $data = $this->client->request(
             '/shipments',
             Client::METHOD_POST,
             $this->serializer->serialize($shipment)
         );
+
+        return $this->serializer->deserialize($data, Shipment::class);
     }
 }

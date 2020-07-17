@@ -26,6 +26,11 @@ class Shipment
     /**
      * @var string|null
      */
+    protected $id;
+
+    /**
+     * @var string|null
+     */
     protected $invoiceReference;
 
     /**
@@ -84,6 +89,37 @@ class Shipment
     protected $items;
 
     /**
+     * @var string|null
+     */
+    protected $sequence;
+
+    /**
+     * @var string|null
+     */
+    protected $service;
+
+    /**
+     * @var array
+     */
+    protected $labels = [];
+
+    /**
+     * @return string|null
+     */
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string|null $id
+     */
+    public function setId(?string $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return string|null
      */
     public function getInvoiceReference(): ?string
@@ -102,7 +138,7 @@ class Shipment
     /**
      * @return string
      */
-    public function getTransportType(): string
+    public function getTransportType(): ?string
     {
         return $this->transportType;
     }
@@ -273,5 +309,53 @@ class Shipment
     public function setItems(array $items): void
     {
         $this->items = $items;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSequence(): ?string
+    {
+        return $this->sequence;
+    }
+
+    /**
+     * @param string|null $sequence
+     */
+    public function setSequence(?string $sequence): void
+    {
+        $this->sequence = $sequence;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getService(): ?string
+    {
+        return $this->service;
+    }
+
+    /**
+     * @param string|null $service
+     */
+    public function setService(?string $service): void
+    {
+        $this->service = $service;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLabels(): array
+    {
+        return $this->labels;
+    }
+
+    /**
+     * @param array $labels
+     */
+    public function setLabels(array $labels): void
+    {
+        $this->labels = $labels;
     }
 }

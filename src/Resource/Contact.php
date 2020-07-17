@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Boekuwzending\Resource;
 
-use Boekuwzending\Exception\InvalidResourceArgumentException;
-
 /**
  * Class Contact.
  */
@@ -22,7 +20,7 @@ class Contact
     protected $company;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $phoneNumber;
 
@@ -66,7 +64,7 @@ class Contact
     /**
      * @return string
      */
-    public function getPhoneNumber(): string
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }

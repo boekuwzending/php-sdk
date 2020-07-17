@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Boekuwzending\Resource;
 
-use Boekuwzending\Exception\InvalidResourceArgumentException;
-
 /**
  * Class Address.
  */
@@ -192,7 +190,7 @@ class Address
     /**
      * @return bool
      */
-    public function getForkliftOrLoadingDockAvailable(): bool
+    public function isForkliftOrLoadingDockAvailable(): bool
     {
         return $this->forkliftOrLoadingDockAvailable;
     }
@@ -208,7 +206,7 @@ class Address
     /**
      * @return bool
      */
-    public function getAccessibleWithTrailer(): bool
+    public function isAccessibleWithTrailer(): bool
     {
         return $this->accessibleWithTrailer;
     }
@@ -219,51 +217,5 @@ class Address
     public function setAccessibleWithTrailer(bool $accessibleWithTrailer): void
     {
         $this->accessibleWithTrailer = $accessibleWithTrailer;
-    }
-
-    /**
-     * @throws InvalidResourceArgumentException
-     */
-    private function validate(): void
-    {
-        if (!empty($this->street) && strlen($this->street) > 35) {
-            throw new InvalidResourceArgumentException('Address street must be 35 characters or shorter.');
-        }
-
-        if (!empty($this->number) && strlen($this->number) > 5) {
-            throw new InvalidResourceArgumentException('Address number must be 5 characters or shorter.');
-        }
-
-        if (!empty($this->numberAddition) && strlen($this->numberAddition) > 10) {
-            throw new InvalidResourceArgumentException('Address number addition must be 10 characters or shorter.');
-        }
-
-        if (!empty($this->addressLine2) && strlen($this->addressLine2) > 35) {
-            throw new InvalidResourceArgumentException('Address line 2 must be 35 characters or shorter.');
-        }
-
-        if (!empty($this->postcode) && strlen($this->postcode) > 12) {
-            throw new InvalidResourceArgumentException('Address postcode must be 12 characters or shorter.');
-        }
-
-        if (empty($this->postcode)) {
-            throw new InvalidResourceArgumentException('Address postcode must not be empty.');
-        }
-
-        if (!empty($this->city) && strlen($this->city) > 25) {
-            throw new InvalidResourceArgumentException('Address city must be 25 characters or shorter.');
-        }
-
-        if (empty($this->city)) {
-            throw new InvalidResourceArgumentException('Address city must not be empty.');
-        }
-
-        if (!empty($this->countryCode) && strlen($this->countryCode) > 2) {
-            throw new InvalidResourceArgumentException('Address country must be 2 characters or shorter.');
-        }
-
-        if (empty($this->countryCode)) {
-            throw new InvalidResourceArgumentException('Address country must not be empty.');
-        }
     }
 }

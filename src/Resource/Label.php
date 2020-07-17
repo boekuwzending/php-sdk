@@ -25,6 +25,11 @@ class Label
     protected $reference;
 
     /**
+     * @var string|null
+     */
+    protected $trackAndTraceLink;
+
+    /**
      * @return string
      */
     public function getId(): string
@@ -62,5 +67,21 @@ class Label
     public function setReference(?string $reference): void
     {
         $this->reference = $reference;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTrackAndTraceLink(): ?string
+    {
+        return $this->trackAndTraceLink;
+    }
+
+    /**
+     * @param string|null $trackAndTraceLink
+     */
+    public function setTrackAndTraceLink(?string $trackAndTraceLink): void
+    {
+        $this->trackAndTraceLink = $trackAndTraceLink;
     }
 }

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Boekuwzending\Resource;
 
-use Boekuwzending\Exception\InvalidResourceArgumentException;
-
 /**
  * Class Item.
  */
@@ -123,7 +121,7 @@ class Item
     /**
      * @return bool|null
      */
-    public function getStackable(): ?bool
+    public function isStackable(): ?bool
     {
         return $this->stackable;
     }

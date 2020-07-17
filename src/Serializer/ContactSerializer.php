@@ -17,13 +17,20 @@ class ContactSerializer implements SerializerInterface
     public function serialize($data): array
     {
         /** @var Contact $data */
-
-        return [
+        $response = [
             'name' => $data->getName(),
-            'company' => $data->getCompany(),
-            'phoneNumber' => $data->getPhoneNumber(),
             'emailAddress' => $data->getEmailAddress(),
         ];
+
+        if (null !== $data->getPhoneNumber()) {
+            $response['phoneNumber'] = $data->getPhoneNumber();
+        }
+
+        if (null !== $data->getCompany()) {
+            $response['company'] = $data->getCompany();
+        }
+
+        return $response;
     }
 
     /**
@@ -31,11 +38,18 @@ class ContactSerializer implements SerializerInterface
      */
     public function deserialize(array $data, string $dataType)
     {
-        return new Contact(
-            $data['name'],
-            $data['company'],
-            $data['phoneNumber'],
-            $data['emailAddress']
-        );
+        $contact = new Contact();
+        $contact->setName($data['name']);
+        $contact->setEmailAddress($data['emailAddress']);
+
+        if(isset($data['phoneNumber'])) {
+            $contact->setPhoneNumber($data['phoneNumber']);
+        }
+
+        if(isset($data['company'])) {
+            $contact->setCompany($data['company']);
+        }
+
+        return $contact;
     }
 }

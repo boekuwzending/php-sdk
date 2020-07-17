@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Boekuwzending\Serializer;
 
 use Boekuwzending\Resource\Label;
+use LogicException;
 
 /**
  * Class LabelSerializer.
@@ -16,7 +17,7 @@ class LabelSerializer implements SerializerInterface
      */
     public function serialize($data): array
     {
-        throw new \LogicException('Not yet implemented: LabelSerializer::serialize');
+        throw new LogicException('Not yet implemented: LabelSerializer::serialize');
     }
 
     /**
@@ -24,10 +25,11 @@ class LabelSerializer implements SerializerInterface
      */
     public function deserialize(array $data, string $dataType): Label
     {
-        return new Label(
-            $data['id'],
-            $data['waybill'],
-            $data['reference']
-        );
+        $label = new Label();
+        $label->setWaybill($data['waybill']);
+        $label->setReference($data['reference']);
+        $label->setTrackAndTraceLink($data['trackAndTraceLink']);
+
+        return $label;
     }
 }
