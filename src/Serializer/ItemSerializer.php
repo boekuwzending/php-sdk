@@ -45,6 +45,31 @@ class ItemSerializer implements SerializerInterface
      */
     public function deserialize(array $data, string $dataType)
     {
-        throw new \LogicException('Not yet implemented: ItemSerializer::deserialize');
+        $item = new Item();
+        $item->setQuantity($data['quantity']);
+        $item->setType($data['type']);
+        $item->setLength($data['dimensions']['length']);
+        $item->setWidth($data['dimensions']['width']);
+        $item->setHeight($data['dimensions']['height']);
+        $item->setWeight($data['weight']);
+        $item->setDescription($data['description']);
+
+        if (isset($data['value'])) {
+            $item->setValue($data['value']);
+        }
+
+        if (isset($data['tariffNumber'])) {
+            $item->setTariffNumber($data['tariffNumber']);
+        }
+
+        if (isset($data['countryOfOrigin'])) {
+            $item->setCountryOfOrigin($data['countryOfOrigin']);
+        }
+
+        if (isset($data['stackable'])) {
+            $item->setStackable($data['stackable']);
+        }
+
+        return $item;
     }
 }

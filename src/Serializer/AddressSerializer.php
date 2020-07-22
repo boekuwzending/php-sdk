@@ -18,8 +18,9 @@ class AddressSerializer implements SerializerInterface
     {
         /** @var Address $data */
 
-        $response = [
+        return [
             'number' => $data->getNumber(),
+            'street' => $data->getStreet(),
             'numberAddition' => $data->getNumberAddition(),
             'addressLine2' => $data->getAddressLine2(),
             'postcode' => $data->getPostcode(),
@@ -29,12 +30,6 @@ class AddressSerializer implements SerializerInterface
             'forkliftOrLoadingDockAvailable' => $data->isForkliftOrLoadingDockAvailable(),
             'accessibleWithTrailer' => $data->isAccessibleWithTrailer(),
         ];
-
-        if (!empty($data->getStreet())) {
-            $response['street']  = $data->getStreet();
-        }
-
-        return $response;
     }
 
     /**
@@ -42,17 +37,29 @@ class AddressSerializer implements SerializerInterface
      */
     public function deserialize(array $data, string $dataType)
     {
-        return new Address(
-            $data['postcode'],
-            $data['city'],
-            $data['country'],
-            $data['privateAddress'],
-            $data['street'],
-            $data['number'],
-            $data['numberAddition'],
-            $data['addressLine2'],
-            $data['forkliftOrLoadingDockAvailable'],
-            $data['accessibleWithTrailer']
-        );
+        $address = new Address();
+        $address->setPostcode($data['postcode']);
+        $address->setCity($data['city']);
+        $address->setCountryCode($data['country']);
+        $address->setNumber($data['number']);
+        $address->setStreet($data['street']);
+
+        if (isset($data['numberAddition'])) {
+           $address->setNumberAddition($data['numberAddition']);
+        }
+
+        if(isset($data['addressLine2'])) {
+            $address->setAddressLine2($data['addressLine2']);
+        }
+
+        if(isset($data['forkliftOrLoadingDockAvailable'])) {
+            $address->setForkliftOrLoadingDockAvailable($data['forkliftOrLoadingDockAvailable']);
+        }
+
+        if(isset($data['accessibleWithTrailer'])) {
+            $address->setAccessibleWithTrailer($data['accessibleWithTrailer']);
+        }
+
+        return $address;
     }
 }

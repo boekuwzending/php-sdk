@@ -32,27 +32,19 @@ class TrackingLine
     protected $dateTime;
 
     /**
-     * TrackingLine constructor.
-     *
-     * @param string                 $status
-     * @param string                 $description
-     * @param string                 $location
-     * @param DateTimeInterface|null $dateTime
-     */
-    public function __construct(string $status, string $description, ?string $location, ?DateTimeInterface $dateTime)
-    {
-        $this->status = $status;
-        $this->description = $description;
-        $this->location = $location;
-        $this->dateTime = $dateTime;
-    }
-
-    /**
      * @return string
      */
     public function getStatus(): string
     {
         return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
     }
 
     /**
@@ -64,6 +56,14 @@ class TrackingLine
     }
 
     /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
      * @return string|null
      */
     public function getLocation(): ?string
@@ -72,10 +72,26 @@ class TrackingLine
     }
 
     /**
+     * @param string|null $location
+     */
+    public function setLocation(?string $location): void
+    {
+        $this->location = $location;
+    }
+
+    /**
      * @return DateTimeInterface|null
      */
     public function getDateTime(): ?DateTimeInterface
     {
         return $this->dateTime;
+    }
+
+    /**
+     * @param DateTimeInterface|null $dateTime
+     */
+    public function setDateTime(?DateTimeInterface $dateTime): void
+    {
+        $this->dateTime = $dateTime;
     }
 }

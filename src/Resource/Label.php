@@ -25,18 +25,9 @@ class Label
     protected $reference;
 
     /**
-     * Label constructor.
-     *
-     * @param string      $id
-     * @param string      $waybill
-     * @param string|null $reference
+     * @var string|null
      */
-    public function __construct(string $id, string $waybill, ?string $reference)
-    {
-        $this->id = $id;
-        $this->waybill = $waybill;
-        $this->reference = $reference;
-    }
+    protected $trackAndTraceLink;
 
     /**
      * @return string
@@ -55,10 +46,42 @@ class Label
     }
 
     /**
+     * @param string $waybill
+     */
+    public function setWaybill(string $waybill): void
+    {
+        $this->waybill = $waybill;
+    }
+
+    /**
      * @return string|null
      */
     public function getReference(): ?string
     {
         return $this->reference;
+    }
+
+    /**
+     * @param string|null $reference
+     */
+    public function setReference(?string $reference): void
+    {
+        $this->reference = $reference;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTrackAndTraceLink(): ?string
+    {
+        return $this->trackAndTraceLink;
+    }
+
+    /**
+     * @param string|null $trackAndTraceLink
+     */
+    public function setTrackAndTraceLink(?string $trackAndTraceLink): void
+    {
+        $this->trackAndTraceLink = $trackAndTraceLink;
     }
 }

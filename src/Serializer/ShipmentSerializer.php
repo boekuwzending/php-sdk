@@ -10,6 +10,7 @@ use Boekuwzending\Resource\Contact;
 use Boekuwzending\Resource\DeliveryInstruction;
 use Boekuwzending\Resource\DispatchInstruction;
 use Boekuwzending\Resource\Item;
+use Boekuwzending\Resource\Label;
 use Boekuwzending\Resource\Shipment;
 
 /**
@@ -30,24 +31,37 @@ class ShipmentSerializer implements SerializerInterface
         $serializer = new Serializer();
 
         $response = [
+            'service' => $data->getService(),
             'invoiceReference' => $data->getInvoiceReference(),
             'transportType' => $data->getTransportType(),
-            'shipFrom' => [
-                'contact' => $serializer->serialize($data->getShipFromContact()),
-                'address' => $serializer->serialize($data->getShipFromAddress()),
-            ],
             'shipTo' => [
                 'contact' => $serializer->serialize($data->getShipToContact()),
                 'address' => $serializer->serialize($data->getShipToAddress()),
             ],
-            'dpdNumber' => $data->getDpdNumber(),
-            'dpdDepotCode' => $data->getDpdDepotCode(),
             'dispatch' => $serializer->serialize($data->getDispatch()),
-            'delivery' => $serializer->serialize($data->getDelivery()),
             'items' => array_map(static function (Item $item) use ($serializer) {
                 return $serializer->serialize($item);
             }, $data->getItems()),
         ];
+
+        if (null !== $data->getShipFromContact()) {
+            $response['shipFrom'] = [
+                'contact' => $serializer->serialize($data->getShipFromContact()),
+                'address' => $serializer->serialize($data->getShipFromAddress()),
+            ];
+        }
+
+        if (null !== $data->getDpdNumber()) {
+            $response['dpdNumber'] = $data->getDpdNumber();
+        }
+
+        if (null !== $data->getDpdDepotCode()) {
+            $response['dpdDepotCode'] = $data->getDpdDepotCode();
+        }
+
+        if (null !== $data->getDelivery()) {
+            $response['delivery'] = $data->getDelivery();
+        }
 
         if (!empty($data->getIncoTerms())) {
             $response['incoTerms'] = $data->getIncoTerms();
@@ -57,7 +71,7 @@ class ShipmentSerializer implements SerializerInterface
     }
 
     /**
-     * @param array  $data
+     * @param array $data
      * @param string $dataType
      *
      * @return Shipment|mixed
@@ -66,19 +80,53 @@ class ShipmentSerializer implements SerializerInterface
     {
         $serializer = new Serializer();
 
-        return new Shipment(
-            $data['transportType'],
-            $serializer->deserialize($data['shipFrom']['contact'], Contact::class),
-            $serializer->deserialize($data['shipFrom']['address'], Address::class),
-            $serializer->deserialize($data['shipTo']['contact'], Contact::class),
-            $serializer->deserialize($data['shipTo']['address'], Address::class),
-            $serializer->deserialize($data['dispatch'], DispatchInstruction::class),
-            $serializer->deserialize($data['delivery'], DeliveryInstruction::class),
-            [],
-            $data['invoiceReference'],
-            $data['incoTerms'],
-            $data['dpdNumber'] ?? null,
-            $data['dpdDepotCode'] ?? null
-        );
+        $shipment = new Shipment();
+        $shipment->setTransportType($data['transportType']);
+        $shipment->setShipFromContact($serializer->deserialize($data['shipFrom']['contact'], Contact::class));
+        $shipment->setShipFromAddress($serializer->deserialize($data['shipFrom']['address'], Address::class));
+        $shipment->setShipToContact($serializer->deserialize($data['shipTo']['contact'], Contact::class));
+        $shipment->setShipToAddress($serializer->deserialize($data['shipTo']['address'], Address::class));
+        $shipment->setDispatch($serializer->deserialize($data['dispatch'], DispatchInstruction::class));
+        $shipment->setInvoiceReference($data['invoiceReference']);
+        $shipment->setSequence($data['sequence']);
+        $shipment->setService($data['service']);
+
+        $items = [];
+        foreach ($data['items'] as $item) {
+            $items[] = $serializer->deserialize($item, Item::class);
+        }
+
+        $shipment->setItems($items);
+
+        if (isset($data['id'])) {
+            $shipment->setId($data['id']);
+        }
+
+        if (isset($data['dpdNumber'])) {
+            $shipment->setDpdNumber($data['dpdNumber']);
+        }
+
+        if (isset($data['dpdDepotCode'])) {
+            $shipment->setDpdDepotCode($data['dpdDepotCode']);
+        }
+
+        if (isset($data['incoTerms'])) {
+            $shipment->setIncoTerms($data['incoTerms']);
+        }
+
+        if (isset($data['delivery'])) {
+            $shipment->setDelivery($serializer->deserialize($data['delivery'], DeliveryInstruction::class));
+        }
+
+        if(isset($data['labels'])) {
+            $labels = [];
+            foreach($data['labels'] as $label) {
+                $labels[] = $serializer->deserialize($label, Label::class);
+            }
+
+            $shipment->setLabels($labels);
+        }
+
+        return $shipment;
     }
 }

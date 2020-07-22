@@ -6,6 +6,8 @@ namespace Boekuwzending\Serializer;
 
 use Boekuwzending\Resource\DeliveryInstruction;
 use Boekuwzending\Resource\DispatchInstruction;
+use DateTime;
+use Exception;
 
 /**
  * Class InstructionSerializer.
@@ -29,7 +31,7 @@ class InstructionSerializer implements SerializerInterface
         ];
 
         if (null !== $data->getDate()) {
-            $response['date'] = $data->getDate()->getTimestamp();
+            $response['date'] = $data->getDate()->format('Y-m-d');
         }
 
         return $response;
@@ -37,16 +39,21 @@ class InstructionSerializer implements SerializerInterface
 
     /**
      * @inheritDoc
+     * @throws Exception
      */
     public function deserialize(array $data, string $dataType)
     {
         /** @var DeliveryInstruction|DispatchInstruction */
-        return new $dataType(
-            !empty($data['date']) ? new \DateTime($data['date']) : null,
-            $data['instructions'],
-            $data['reference'],
-            $data['timeWindow']['begin'],
-            $data['timeWindow']['end']
-        );
+        $object = new $dataType();
+        $object->setInstructions($data['instructions']);
+        $object->setReference($data['reference']);
+        $object->setTimeWindowBegin($data['timeWindow']['begin']);
+        $object->setTimeWindowEnd($data['timeWindow']['end']);
+
+        if (!empty($data['date'])) {
+            $object->setDate((new DateTime($data['date'])));
+        }
+
+        return $object;
     }
 }

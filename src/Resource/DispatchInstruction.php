@@ -18,33 +18,18 @@ class DispatchInstruction extends Instruction
     protected $date;
 
     /**
-     * DispatchInstruction constructor.
-     *
-     * @param DateTimeInterface      $date
-     * @param string|null            $instructions
-     * @param string|null            $reference
-     * @param DateTimeInterface|null $timeWindowBegin
-     * @param DateTimeInterface|null $timeWindowEnd
-     *
-     * @throws InvalidResourceArgumentException
-     */
-    public function __construct(
-        DateTimeInterface $date,
-        string $instructions = null,
-        string $reference = null,
-        DateTimeInterface $timeWindowBegin = null,
-        DateTimeInterface $timeWindowEnd = null
-    ) {
-        parent::__construct($instructions, $reference, $timeWindowBegin, $timeWindowEnd);
-
-        $this->date = $date;
-    }
-
-    /**
      * @return DateTimeInterface
      */
     public function getDate(): DateTimeInterface
     {
         return $this->date;
+    }
+
+    /**
+     * @param DateTimeInterface $date
+     */
+    public function setDate(DateTimeInterface $date): void
+    {
+        $this->date = $date;
     }
 }

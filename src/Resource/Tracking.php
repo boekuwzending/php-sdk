@@ -22,22 +22,26 @@ class Tracking
     protected $lines;
 
     /**
-     * Tracking constructor.
-     *
-     * @param string $id
-     * @param array  $lines
-     *
-     * @throws InvalidResourceArgumentException
+     * @return string
      */
-    public function __construct(string $id, array $lines)
+    public function getId(): string
     {
-        foreach ($lines as $line) {
-            if ($line instanceof TrackingLine === false) {
-                throw new InvalidResourceArgumentException('Invalid tracking line found.');
-            }
-        }
+        return $this->id;
+    }
 
-        $this->id = $id;
+    /**
+     * @return TrackingLine[]
+     */
+    public function getLines(): array
+    {
+        return $this->lines;
+    }
+
+    /**
+     * @param TrackingLine[] $lines
+     */
+    public function setLines(array $lines): void
+    {
         $this->lines = $lines;
     }
 }

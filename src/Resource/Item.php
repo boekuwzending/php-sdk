@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Boekuwzending\Resource;
 
-use Boekuwzending\Exception\InvalidResourceArgumentException;
-
 /**
  * Class Item.
  */
@@ -89,79 +87,19 @@ class Item
     protected $countryOfOrigin;
 
     /**
-     * Item constructor.
-     *
-     * @param int         $quantity
-     * @param string      $type
-     * @param float       $length
-     * @param float       $height
-     * @param float       $width
-     * @param float       $weight
-     * @param string      $description
-     * @param bool|null   $stackable
-     * @param string|null $customerReference
-     * @param float|null  $value
-     * @param string|null $tariffNumber
-     * @param string|null $countryOfOrigin
-     *
-     * @throws InvalidResourceArgumentException
-     */
-    public function __construct(
-        int $quantity,
-        string $type,
-        float $length,
-        float $height,
-        float $width,
-        float $weight,
-        string $description,
-        bool $stackable = null,
-        string $customerReference = null,
-        float $value = null,
-        string $tariffNumber = null,
-        string $countryOfOrigin = null
-    ) {
-        $this->quantity = $quantity;
-        $this->type = $type;
-        $this->stackable = $stackable;
-        $this->length = $length;
-        $this->height = $height;
-        $this->width = $width;
-        $this->description = $description;
-        $this->customerReference = $customerReference;
-        $this->value = $value;
-        $this->tariffNumber = $tariffNumber;
-        $this->countryOfOrigin = $countryOfOrigin;
-        $this->weight = $weight;
-
-        if (!in_array($this->type, self::VALID_TYPES, true)) {
-            throw new InvalidResourceArgumentException(
-                sprintf('Item type must be one of: %s', implode(', ', self::VALID_TYPES))
-            );
-        }
-
-        if (!empty($this->description) && strlen($this->description) > 70) {
-            throw new InvalidResourceArgumentException('Item description must be 70 characters or shorter.');
-        }
-
-        if (!empty($this->customerReference) && strlen($this->customerReference) > 35) {
-            throw new InvalidResourceArgumentException('Item customerReference must be 35 characters or shorter.');
-        }
-
-        if (!empty($this->tariffNumber) && strlen($this->tariffNumber) > 35) {
-            throw new InvalidResourceArgumentException('Item tariffNumber must be 35 characters or shorter.');
-        }
-
-        if (!empty($this->countryOfOrigin) && strlen($this->countryOfOrigin) > 2) {
-            throw new InvalidResourceArgumentException('Item countryOfOrigin must be 2 characters or shorter.');
-        }
-    }
-
-    /**
      * @return int
      */
     public function getQuantity(): int
     {
         return $this->quantity;
+    }
+
+    /**
+     * @param int $quantity
+     */
+    public function setQuantity(int $quantity): void
+    {
+        $this->quantity = $quantity;
     }
 
     /**
@@ -173,11 +111,27 @@ class Item
     }
 
     /**
+     * @param string $type
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
      * @return bool|null
      */
     public function isStackable(): ?bool
     {
         return $this->stackable;
+    }
+
+    /**
+     * @param bool|null $stackable
+     */
+    public function setStackable(?bool $stackable): void
+    {
+        $this->stackable = $stackable;
     }
 
     /**
@@ -189,11 +143,27 @@ class Item
     }
 
     /**
+     * @param float $length
+     */
+    public function setLength(float $length): void
+    {
+        $this->length = $length;
+    }
+
+    /**
      * @return float
      */
     public function getHeight(): float
     {
         return $this->height;
+    }
+
+    /**
+     * @param float $height
+     */
+    public function setHeight(float $height): void
+    {
+        $this->height = $height;
     }
 
     /**
@@ -205,11 +175,27 @@ class Item
     }
 
     /**
+     * @param float $width
+     */
+    public function setWidth(float $width): void
+    {
+        $this->width = $width;
+    }
+
+    /**
      * @return float
      */
     public function getWeight(): float
     {
         return $this->weight;
+    }
+
+    /**
+     * @param float $weight
+     */
+    public function setWeight(float $weight): void
+    {
+        $this->weight = $weight;
     }
 
     /**
@@ -221,11 +207,27 @@ class Item
     }
 
     /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
      * @return string|null
      */
     public function getCustomerReference(): ?string
     {
         return $this->customerReference;
+    }
+
+    /**
+     * @param string|null $customerReference
+     */
+    public function setCustomerReference(?string $customerReference): void
+    {
+        $this->customerReference = $customerReference;
     }
 
     /**
@@ -237,6 +239,14 @@ class Item
     }
 
     /**
+     * @param float|null $value
+     */
+    public function setValue(?float $value): void
+    {
+        $this->value = $value;
+    }
+
+    /**
      * @return string|null
      */
     public function getTariffNumber(): ?string
@@ -245,10 +255,26 @@ class Item
     }
 
     /**
+     * @param string|null $tariffNumber
+     */
+    public function setTariffNumber(?string $tariffNumber): void
+    {
+        $this->tariffNumber = $tariffNumber;
+    }
+
+    /**
      * @return string|null
      */
     public function getCountryOfOrigin(): ?string
     {
         return $this->countryOfOrigin;
+    }
+
+    /**
+     * @param string|null $countryOfOrigin
+     */
+    public function setCountryOfOrigin(?string $countryOfOrigin): void
+    {
+        $this->countryOfOrigin = $countryOfOrigin;
     }
 }
