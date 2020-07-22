@@ -86,7 +86,7 @@ class Shipment
     /**
      * @var Item[]
      */
-    protected $items;
+    protected $items = [];
 
     /**
      * @var string|null

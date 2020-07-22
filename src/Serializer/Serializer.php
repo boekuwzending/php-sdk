@@ -8,10 +8,14 @@ use Boekuwzending\Exception\SerializerNotFoundException;
 use Boekuwzending\Resource\Address;
 use Boekuwzending\Resource\Contact;
 use Boekuwzending\Resource\DeliveryInstruction;
+use Boekuwzending\Resource\Dimensions;
 use Boekuwzending\Resource\DispatchInstruction;
 use Boekuwzending\Resource\Item;
 use Boekuwzending\Resource\Label;
+use Boekuwzending\Resource\Matrix;
+use Boekuwzending\Resource\MatrixRate;
 use Boekuwzending\Resource\Me;
+use Boekuwzending\Resource\Service;
 use Boekuwzending\Resource\Shipment;
 use Boekuwzending\Resource\Tracking;
 use Boekuwzending\Resource\TrackingLine;
@@ -42,6 +46,10 @@ class Serializer implements SerializerInterface
             Tracking::class => new TrackingSerializer(),
             TrackingLine::class => new TrackingLineSerializer(),
             Label::class => new LabelSerializer(),
+            Dimensions::class => new DimensionsSerializer(),
+            MatrixRate::class => new MatrixRateSerializer(),
+            Matrix::class => new MatrixSerializer(),
+            Service::class => new ServiceSerializer()
         ];
     }
 
