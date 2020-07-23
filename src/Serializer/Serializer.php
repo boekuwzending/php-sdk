@@ -19,9 +19,7 @@ use Boekuwzending\Resource\Me;
 use Boekuwzending\Resource\Service;
 use Boekuwzending\Resource\Shipment;
 use Boekuwzending\Resource\TrackAndTrace;
-use Boekuwzending\Resource\Tracking;
 use Boekuwzending\Resource\TrackingDetail;
-use Boekuwzending\Resource\TrackingLine;
 
 /**
  * Class Serializer.
