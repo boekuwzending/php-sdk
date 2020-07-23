@@ -20,7 +20,7 @@ class TrackAndTraceEndpoint extends AbstractEndpoint
      */
     public function get(string $id)
     {
-        $response = $this->client->request('/shipments/' . $id, Client::METHOD_GET);
+        $response = $this->client->request(sprintf('/track-and-trace/%s', $id), Client::METHOD_GET);
 
         return $this->serializer->deserialize($response, TrackAndTrace::class);
     }

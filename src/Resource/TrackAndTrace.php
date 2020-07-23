@@ -39,17 +39,17 @@ class TrackAndTrace
     }
 
     /**
-     * @return array|TrackingDetail
+     * @return array|TrackingDetail[]
      */
-    public function getDetails()
+    public function getDetails(): array
     {
         return $this->details;
     }
 
     /**
-     * @param array|TrackingDetail $details
+     * @param array|TrackingDetail[] $details
      */
-    public function setDetails($details): void
+    public function setDetails(array $details): void
     {
         $this->details = $details;
     }
