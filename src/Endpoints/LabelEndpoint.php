@@ -27,4 +27,17 @@ class LabelEndpoint extends AbstractEndpoint
 
         return $this->serializer->deserialize($response, Label::class);
     }
+
+    /**
+     * @param string $id
+     * @return mixed
+     * @throws AuthorizationFailedException
+     * @throws RequestFailedException
+     */
+    public function trackAndTrace(string $id)
+    {
+        $response = $this->client->request('/track-and-trace/' . $id, Client::METHOD_GET);
+
+        return $this->serializer->deserialize($response, Label::class);
+    }
 }
