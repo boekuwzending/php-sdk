@@ -7,7 +7,7 @@ namespace Boekuwzending;
 use Boekuwzending\Endpoints\LabelEndpoint;
 use Boekuwzending\Endpoints\MeEndpoint;
 use Boekuwzending\Endpoints\ShipmentEndpoint;
-use Boekuwzending\Endpoints\TrackingEndpoint;
+use Boekuwzending\Endpoints\TrackAndTraceEndpoint;
 use Boekuwzending\Exception\AuthorizationFailedException;
 use Boekuwzending\Exception\NoCredentialsException;
 use Boekuwzending\Exception\RequestFailedException;
@@ -63,14 +63,14 @@ class Client
     public $shipment;
 
     /**
-     * @var TrackingEndpoint
-     */
-    public $tracking;
-
-    /**
      * @var LabelEndpoint
      */
     public $label;
+
+    /**
+     * @var TrackAndTraceEndpoint
+     */
+    public $trackAndTrace;
 
     /**
      * BuzApiClient constructor.
@@ -132,7 +132,7 @@ class Client
     {
         $this->me = new MeEndpoint($this, $serializer);
         $this->shipment = new ShipmentEndpoint($this, $serializer);
-        $this->tracking = new TrackingEndpoint($this, $serializer);
+        $this->trackAndTrace = new TrackAndTraceEndpoint($this, $serializer);
         $this->label = new LabelEndpoint($this, $serializer);
     }
 

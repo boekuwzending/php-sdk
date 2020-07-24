@@ -26,6 +26,7 @@ class LabelSerializer implements SerializerInterface
     public function deserialize(array $data, string $dataType): Label
     {
         $label = new Label();
+        $label->setId($data['id']);
         $label->setWaybill($data['waybill']);
         $label->setReference($data['reference']);
         $label->setTrackAndTraceLink($data['trackAndTraceLink']);
