@@ -22,6 +22,10 @@ class TrackAndTraceEndpoint extends AbstractEndpoint
     {
         $response = $this->client->request(sprintf('/track-and-trace/%s', $id), Client::METHOD_GET);
 
+        if (isset($response['error'])) {
+            return $response;
+        }
+
         return $this->serializer->deserialize($response, TrackAndTrace::class);
     }
 }
