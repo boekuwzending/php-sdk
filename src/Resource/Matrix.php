@@ -15,7 +15,7 @@ class Matrix
     protected $name;
 
     /**
-     * @var array|MatrixRate
+     * @var MatrixRate[]
      */
     protected $rates = [];
 
@@ -62,7 +62,7 @@ class Matrix
     }
 
     /**
-     * @return array|MatrixRate
+     * @return MatrixRate[]
      */
     public function getRates()
     {
@@ -70,7 +70,7 @@ class Matrix
     }
 
     /**
-     * @param array|MatrixRate $rates
+     * @param MatrixRate[] $rates
      */
     public function setRates($rates): void
     {
