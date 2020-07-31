@@ -62,7 +62,7 @@ class Matrix
     }
 
     /**
-     * @return array|MatrixRate
+     * @return MatrixRate[]
      */
     public function getRates()
     {
