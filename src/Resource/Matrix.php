@@ -15,7 +15,7 @@ class Matrix
     protected $name;
 
     /**
-     * @var array|MatrixRate
+     * @var MatrixRate[]
      */
     protected $rates = [];
 
