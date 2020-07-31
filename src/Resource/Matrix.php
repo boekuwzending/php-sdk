@@ -70,7 +70,7 @@ class Matrix
     }
 
     /**
-     * @param array|MatrixRate $rates
+     * @param MatrixRate[] $rates
      */
     public function setRates($rates): void
     {
