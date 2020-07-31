@@ -31,7 +31,6 @@ class MatrixRateSerializer implements SerializerInterface
         $matrixRate = new MatrixRate();
         $matrixRate->setId($data['id']);
         $matrixRate->setPrice($data['price']);
-
         $matrixRate->setService($serializer->deserialize($data['service'], Service::class));
 
         return $matrixRate;
