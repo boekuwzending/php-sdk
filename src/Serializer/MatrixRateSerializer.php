@@ -14,7 +14,8 @@ use LogicException;
 class MatrixRateSerializer implements SerializerInterface
 {
     /**
-     * @inheritDoc
+     * @param $data
+     * @return array
      */
     public function serialize($data): array
     {
@@ -22,7 +23,9 @@ class MatrixRateSerializer implements SerializerInterface
     }
 
     /**
-     * @inheritDoc
+     * @param array $data
+     * @param string $dataType
+     * @return MatrixRate
      */
     public function deserialize(array $data, string $dataType): MatrixRate
     {
