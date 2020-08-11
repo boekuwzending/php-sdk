@@ -16,7 +16,8 @@ use LogicException;
 class TrackAndTraceSerializer implements SerializerInterface
 {
     /**
-     * @inheritDoc
+     * @param $data
+     * @return array
      */
     public function serialize($data): array
     {
@@ -24,8 +25,9 @@ class TrackAndTraceSerializer implements SerializerInterface
     }
 
     /**
-     * @inheritDoc
-     * @throws Exception
+     * @param array $data
+     * @param string $dataType
+     * @return TrackAndTrace
      */
     public function deserialize(array $data, string $dataType): TrackAndTrace
     {

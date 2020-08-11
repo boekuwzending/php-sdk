@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Boekuwzending\Serializer;
 
-use Boekuwzending\Resource\Distributor;
 use Boekuwzending\Resource\TrackingDetail;
 use DateTime;
 use Exception;
@@ -16,7 +15,8 @@ use LogicException;
 class TrackingDetailSerializer implements SerializerInterface
 {
     /**
-     * @inheritDoc
+     * @param $data
+     * @return array
      */
     public function serialize($data): array
     {
@@ -24,7 +24,9 @@ class TrackingDetailSerializer implements SerializerInterface
     }
 
     /**
-     * @inheritDoc
+     * @param array $data
+     * @param string $dataType
+     * @return TrackingDetail
      * @throws Exception
      */
     public function deserialize(array $data, string $dataType): TrackingDetail

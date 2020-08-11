@@ -14,7 +14,7 @@ class TrackAndTraceEndpoint extends AbstractEndpoint
 {
     /**
      * @param string $id
-     * @return mixed
+     * @return array
      * @throws AuthorizationFailedException
      * @throws RequestFailedException
      */

@@ -13,7 +13,8 @@ use LogicException;
 class DistributorSerializer implements SerializerInterface
 {
     /**
-     * @inheritDoc
+     * @param $data
+     * @return array
      */
     public function serialize($data): array
     {
@@ -21,7 +22,9 @@ class DistributorSerializer implements SerializerInterface
     }
 
     /**
-     * @inheritDoc
+     * @param array $data
+     * @param string $dataType
+     * @return Distributor
      */
     public function deserialize(array $data, string $dataType): Distributor
     {

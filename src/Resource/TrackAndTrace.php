@@ -13,7 +13,7 @@ class TrackAndTrace
     protected $active;
 
     /**
-     * @var array|TrackingDetail
+     * @var TrackingDetail[]
      */
     protected $details;
 
@@ -39,7 +39,7 @@ class TrackAndTrace
     }
 
     /**
-     * @return array|TrackingDetail[]
+     * @return TrackingDetail[]
      */
     public function getDetails(): array
     {
@@ -47,7 +47,7 @@ class TrackAndTrace
     }
 
     /**
-     * @param array|TrackingDetail[] $details
+     * @param TrackingDetail[] $details
      */
     public function setDetails(array $details): void
     {

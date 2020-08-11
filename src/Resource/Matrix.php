@@ -2,6 +2,9 @@
 
 namespace Boekuwzending\Resource;
 
+/**
+ * Class Matrix
+ */
 class Matrix
 {
     /**
