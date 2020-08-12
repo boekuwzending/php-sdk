@@ -86,7 +86,7 @@ class Shipment
     /**
      * @var Item[]
      */
-    protected $items;
+    protected $items = [];
 
     /**
      * @var string|null
@@ -102,6 +102,11 @@ class Shipment
      * @var array
      */
     protected $labels = [];
+
+    /**
+     * @var string|null
+     */
+    protected $status;
 
     /**
      * @return string|null
@@ -357,5 +362,21 @@ class Shipment
     public function setLabels(array $labels): void
     {
         $this->labels = $labels;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string|null $status
+     */
+    public function setStatus(?string $status): void
+    {
+        $this->status = $status;
     }
 }

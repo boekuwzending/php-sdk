@@ -7,6 +7,7 @@ namespace Boekuwzending\Endpoints;
 use Boekuwzending\Client;
 use Boekuwzending\Exception\AuthorizationFailedException;
 use Boekuwzending\Exception\RequestFailedException;
+use Boekuwzending\Resource\Matrix;
 use Boekuwzending\Resource\Shipment;
 
 /**
@@ -44,5 +45,26 @@ class ShipmentEndpoint extends AbstractEndpoint
         );
 
         return $this->serializer->deserialize($data, Shipment::class);
+    }
+
+    /**
+     * @param Shipment $shipment
+     * @return Matrix|null
+     * @throws AuthorizationFailedException
+     * @throws RequestFailedException
+     */
+    public function getMatrix(Shipment $shipment): ?Matrix
+    {
+        $data = $this->client->request(
+            '/shipments/matrix',
+            Client::METHOD_POST,
+            $this->serializer->serialize($shipment)
+        );
+
+        if (empty($data)) {
+            return null;
+        }
+
+        return $this->serializer->deserialize($data, Matrix::class);
     }
 }

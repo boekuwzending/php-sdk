@@ -31,7 +31,6 @@ class ShipmentSerializer implements SerializerInterface
         $serializer = new Serializer();
 
         $response = [
-            'service' => $data->getService(),
             'invoiceReference' => $data->getInvoiceReference(),
             'transportType' => $data->getTransportType(),
             'shipTo' => [
@@ -43,6 +42,10 @@ class ShipmentSerializer implements SerializerInterface
                 return $serializer->serialize($item);
             }, $data->getItems()),
         ];
+
+        if (null !== $data->getService()) {
+            $response['service'] = $data->getService();
+        }
 
         if (null !== $data->getShipFromContact()) {
             $response['shipFrom'] = [
@@ -89,7 +92,7 @@ class ShipmentSerializer implements SerializerInterface
         $shipment->setDispatch($serializer->deserialize($data['dispatch'], DispatchInstruction::class));
         $shipment->setInvoiceReference($data['invoiceReference']);
         $shipment->setSequence($data['sequence']);
-        $shipment->setService($data['service']);
+        $shipment->setStatus($data['status']);
 
         $items = [];
         foreach ($data['items'] as $item) {
@@ -116,6 +119,10 @@ class ShipmentSerializer implements SerializerInterface
 
         if (isset($data['delivery'])) {
             $shipment->setDelivery($serializer->deserialize($data['delivery'], DeliveryInstruction::class));
+        }
+
+        if (isset($data['service'])) {
+            $shipment->setService($data['service']);
         }
 
         if(isset($data['labels'])) {
