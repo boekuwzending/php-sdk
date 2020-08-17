@@ -27,10 +27,11 @@ class MeSerializer implements SerializerInterface
      */
     public function deserialize(array $data, string $dataType): Me
     {
-        return new Me(
-            $data['name'],
-            $data['number'],
-            $data['id']
-        );
+        $me = new Me();
+        $me->setId($data['id']);
+        $me->setNumber($data['number']);
+        $me->setName($data['name']);
+
+        return $me;
     }
 }
