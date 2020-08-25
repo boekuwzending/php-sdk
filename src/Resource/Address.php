@@ -15,7 +15,7 @@ class Address
     protected $street;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $number;
 
@@ -78,7 +78,7 @@ class Address
     /**
      * @return string|null
      */
-    public function getNumber(): string
+    public function getNumber(): ?string
     {
         return $this->number;
     }
@@ -86,7 +86,7 @@ class Address
     /**
      * @param string|null $number
      */
-    public function setNumber(string $number): void
+    public function setNumber(?string $number): void
     {
         $this->number = $number;
     }
