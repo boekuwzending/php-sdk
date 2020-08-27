@@ -109,6 +109,11 @@ class Shipment
     protected $status;
 
     /**
+     * @var string|Shipment|null
+     */
+    protected $related;
+
+    /**
      * @return string|null
      */
     public function getId(): ?string
@@ -378,5 +383,31 @@ class Shipment
     public function setStatus(?string $status): void
     {
         $this->status = $status;
+    }
+
+    public function getRelated(): string
+    {
+        return $this->related;
+    }
+
+    /**
+     * @param string|Shipment|null
+     */
+    public function setRelated($shipment): void
+    {
+        $id = null;
+
+        if (null === $shipment) {
+            $this->related = null;
+            return;
+        }
+
+        if ($shipment instanceof self) {
+            $id = $shipment->getId();
+        } else {
+            $id = $shipment;
+        }
+
+        $this->related = sprintf('/shipments/%s', $id);
     }
 }

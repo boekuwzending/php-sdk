@@ -67,4 +67,20 @@ class ShipmentEndpoint extends AbstractEndpoint
 
         return $this->serializer->deserialize($data, Matrix::class);
     }
+
+    /**
+     * @param string $id
+     * @return string
+     * @throws AuthorizationFailedException
+     * @throws RequestFailedException
+     */
+    public function downloadLabels(string $id): string
+    {
+        $data = $this->client->request(
+            sprintf('/shipments/%s/labels/download', $id),
+            Client::METHOD_GET
+        );
+
+        return $data;
+    }
 }

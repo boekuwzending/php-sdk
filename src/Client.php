@@ -100,11 +100,11 @@ class Client
      * @param string     $method
      * @param array|null $body
      *
-     * @return array
+     * @return array|string
      * @throws AuthorizationFailedException
      * @throws RequestFailedException
      */
-    public function request(string $url, string $method, array $body = null): array
+    public function request(string $url, string $method, array $body = null)
     {
         if (empty($this->accessToken)) {
             $this->authorize();
@@ -117,12 +117,19 @@ class Client
                 ],
                 'json' => $body ?? [],
             ]);
+
         } catch (TransportExceptionInterface $e) {
             throw new RequestFailedException($e->getMessage());
         }
 
         try {
-            return json_decode($response->getContent(), true);
+            $json = json_decode($response->getContent(), true);
+
+            if (!$json) {
+                return $response->getContent();
+            }
+
+            return $json;
         } catch (ClientExceptionInterface | RedirectionExceptionInterface | ServerExceptionInterface | TransportExceptionInterface $e) {
             throw new RequestFailedException($e->getMessage());
         }

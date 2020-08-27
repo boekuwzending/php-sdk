@@ -70,6 +70,10 @@ class ShipmentSerializer implements SerializerInterface
             $response['incoTerms'] = $data->getIncoTerms();
         }
 
+        if (null !== $data->getRelated()) {
+            $response['related'] = $data->getRelated();
+        }
+
         return $response;
     }
 
@@ -93,6 +97,7 @@ class ShipmentSerializer implements SerializerInterface
         $shipment->setInvoiceReference($data['invoiceReference']);
         $shipment->setSequence($data['sequence']);
         $shipment->setStatus($data['status']);
+        $shipment->setRelated($data['related']);
 
         $items = [];
         foreach ($data['items'] as $item) {
