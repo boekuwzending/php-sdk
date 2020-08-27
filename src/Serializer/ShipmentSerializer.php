@@ -11,6 +11,7 @@ use Boekuwzending\Resource\DeliveryInstruction;
 use Boekuwzending\Resource\DispatchInstruction;
 use Boekuwzending\Resource\Item;
 use Boekuwzending\Resource\Label;
+use Boekuwzending\Resource\PickupPoint;
 use Boekuwzending\Resource\Shipment;
 
 /**
@@ -74,6 +75,10 @@ class ShipmentSerializer implements SerializerInterface
             $response['related'] = $data->getRelated();
         }
 
+        if (null !== $data->getPickupPoint()) {
+            $response['pickupPoint'] = $serializer->serialize($data->getPickupPoint());
+        }
+
         return $response;
     }
 
@@ -130,13 +135,17 @@ class ShipmentSerializer implements SerializerInterface
             $shipment->setService($data['service']);
         }
 
-        if(isset($data['labels'])) {
+        if (isset($data['labels'])) {
             $labels = [];
-            foreach($data['labels'] as $label) {
+            foreach ($data['labels'] as $label) {
                 $labels[] = $serializer->deserialize($label, Label::class);
             }
 
             $shipment->setLabels($labels);
+        }
+
+        if (isset($data['pickupPoint'])) {
+            $shipment->setPickupPoint($serializer->deserialize($data['pickupPoint'], PickupPoint::class));
         }
 
         return $shipment;

@@ -23,6 +23,16 @@ class Service
     protected $name;
 
     /**
+     * @var bool
+     */
+    protected $pickupPoint = false;
+
+    /**
+     * @var string
+     */
+    protected $distributorIdentifier;
+
+    /**
      * @return string
      */
     public function getId(): string
@@ -68,5 +78,37 @@ class Service
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPickupPoint(): bool
+    {
+        return $this->pickupPoint;
+    }
+
+    /**
+     * @param bool $pickupPoint
+     */
+    public function setPickupPoint(bool $pickupPoint): void
+    {
+        $this->pickupPoint = $pickupPoint;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDistributorIdentifier(): string
+    {
+        return $this->distributorIdentifier;
+    }
+
+    /**
+     * @param string $distributorIdentifier
+     */
+    public function setDistributorIdentifier(string $distributorIdentifier): void
+    {
+        $this->distributorIdentifier = $distributorIdentifier;
     }
 }

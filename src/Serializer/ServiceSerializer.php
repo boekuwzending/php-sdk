@@ -32,6 +32,8 @@ class ServiceSerializer implements SerializerInterface
         $service->setId($data['id']);
         $service->setKey($data['key']);
         $service->setName($data['name']);
+        $service->setPickupPoint($data['pickupPoint']);
+        $service->setDistributorIdentifier($data['distributorIdentifier']);
 
         return $service;
     }

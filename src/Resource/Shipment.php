@@ -114,6 +114,11 @@ class Shipment
     protected $related;
 
     /**
+     * @var PickupPoint|null
+     */
+    protected $pickupPoint;
+
+    /**
      * @return string|null
      */
     public function getId(): ?string
@@ -412,5 +417,21 @@ class Shipment
         }
 
         $this->related = sprintf('/shipments/%s', $id);
+    }
+
+    /**
+     * @return PickupPoint|null
+     */
+    public function getPickupPoint(): ?PickupPoint
+    {
+        return $this->pickupPoint;
+    }
+
+    /**
+     * @param PickupPoint|null $pickupPoint
+     */
+    public function setPickupPoint(?PickupPoint $pickupPoint): void
+    {
+        $this->pickupPoint = $pickupPoint;
     }
 }
