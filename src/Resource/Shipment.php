@@ -385,7 +385,10 @@ class Shipment
         $this->status = $status;
     }
 
-    public function getRelated(): string
+    /**
+     * @return string|null
+     */
+    public function getRelated(): ?string
     {
         return $this->related;
     }
