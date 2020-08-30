@@ -2,7 +2,7 @@
 
 namespace Boekuwzending\Utils;
 
-use RuntimeException;
+use Boekuwzending\Exception\IncompatiblePlatformException;
 
 /**
  * Class CompatibilityChecker
@@ -16,25 +16,28 @@ class CompatibilityChecker
 
     /**
      * @return bool
-     * @throws RuntimeException
+     * @throws IncompatiblePlatformException
      */
     public function check(): bool
     {
         if (!$this->satisfiesPhpVersion()) {
-            throw new RuntimeException(
-                "The SDK requires PHP version >= " . self::MIN_PHP_VERSION . ", you have " . PHP_VERSION . " installed."
+            throw new IncompatiblePlatformException(
+                "The SDK requires PHP version >= " . self::MIN_PHP_VERSION . ", you have " . PHP_VERSION . " installed.",
+                IncompatiblePlatformException::INCOMPATIBLE_PHP_VERSION
             );
         }
 
         if (!$this->satisfiesJsonExtension()) {
-            throw new RuntimeException(
-                "PHP extension json is not enabled. Please make sure to enable 'json' in your PHP configuration."
+            throw new IncompatiblePlatformException(
+                "PHP extension json is not enabled. Please make sure to enable 'json' in your PHP configuration.",
+                IncompatiblePlatformException::INCOMPATIBLE_JSON_EXTENSION
             );
         }
 
         if (!$this->satisfiesCurlExtension()) {
-            throw new RuntimeException(
-                "PHP extension curl is not enabled. Please make sure to enable 'curl' in your PHP configuration."
+            throw new IncompatiblePlatformException(
+                "PHP extension curl is not enabled. Please make sure to enable 'curl' in your PHP configuration.",
+                IncompatiblePlatformException::INCOMPATIBLE_CURL_EXTENSION
             );
         }
 
