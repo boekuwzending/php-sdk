@@ -73,6 +73,11 @@ class Client
     public $trackAndTrace;
 
     /**
+     * @var array
+     */
+    private $additionalUserAgents = [];
+
+    /**
      * BuzApiClient constructor.
      *
      * @param HttpClientInterface $httpClient
@@ -96,6 +101,19 @@ class Client
     }
 
     /**
+     * @param array $userAgents
+     */
+    public function setAdditionalUserAgents(array $userAgents = []): void
+    {
+        $this->additionalUserAgents = $userAgents;
+    }
+
+    public function getAdditionalUserAgents()
+    {
+        return $this->additionalUserAgents;
+    }
+
+    /**
      * @param string     $url
      * @param string     $method
      * @param array|null $body
@@ -114,6 +132,7 @@ class Client
             $response = $this->httpClient->request($method, $url, [
                 'headers' => [
                     'Authorization' => sprintf('Bearer %s', $this->accessToken),
+                    'User-Agent' => implode('/', $this->additionalUserAgents)
                 ],
                 'json' => $body ?? [],
             ]);
@@ -125,7 +144,7 @@ class Client
         try {
             $json = json_decode($response->getContent(), true);
 
-            if (!$json) {
+            if (!is_array($json)) {
                 return $response->getContent();
             }
 
