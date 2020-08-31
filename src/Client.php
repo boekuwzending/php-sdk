@@ -108,7 +108,18 @@ class Client
         $this->additionalUserAgents = $userAgents;
     }
 
-    public function getAdditionalUserAgents()
+    /**
+     * @param string $userAgent
+     */
+    public function addAdditionalUserAgent(string $userAgent): void
+    {
+        $this->additionalUserAgents[] = $userAgent;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAdditionalUserAgents(): array
     {
         return $this->additionalUserAgents;
     }
@@ -132,7 +143,7 @@ class Client
             $response = $this->httpClient->request($method, $url, [
                 'headers' => [
                     'Authorization' => sprintf('Bearer %s', $this->accessToken),
-                    'User-Agent' => implode('/', $this->additionalUserAgents)
+                    'User-Agent' => implode(' ', $this->additionalUserAgents)
                 ],
                 'json' => $body ?? [],
             ]);
