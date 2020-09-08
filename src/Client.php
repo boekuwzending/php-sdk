@@ -125,15 +125,16 @@ class Client
     }
 
     /**
-     * @param string     $url
-     * @param string     $method
+     * @param string $url
+     * @param string $method
      * @param array|null $body
      *
+     * @param array $query
      * @return array|string
      * @throws AuthorizationFailedException
      * @throws RequestFailedException
      */
-    public function request(string $url, string $method, array $body = null)
+    public function request(string $url, string $method, array $body = [], array $query = [])
     {
         if (empty($this->accessToken)) {
             $this->authorize();
@@ -145,7 +146,8 @@ class Client
                     'Authorization' => sprintf('Bearer %s', $this->accessToken),
                     'User-Agent' => implode(' ', $this->additionalUserAgents)
                 ],
-                'json' => $body ?? [],
+                'json' => $body,
+                'query' => $query
             ]);
 
         } catch (TransportExceptionInterface $e) {

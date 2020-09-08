@@ -27,4 +27,17 @@ class LabelEndpoint extends AbstractEndpoint
 
         return $this->serializer->deserialize($response, Label::class);
     }
+
+    /**
+     * @param array $shipmentIds
+     * @return array|string
+     * @throws AuthorizationFailedException
+     * @throws RequestFailedException
+     */
+    public function download(array $shipmentIds)
+    {
+        return $this->client->request('/labels/download-shipments', Client::METHOD_GET, [], [
+            'shipments' => $shipmentIds
+        ]);
+    }
 }
