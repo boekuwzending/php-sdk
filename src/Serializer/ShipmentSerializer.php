@@ -56,7 +56,11 @@ class ShipmentSerializer implements SerializerInterface
         }
 
         if (null !== $data->getDpdNumber()) {
-            $response['dpdNumber'] = $data->getDpdNumber();
+            $response['dpdCustomerNumber'] = $data->getDpdNumber();
+        }
+
+        if (null !== $data->getDpdPickupBy()) {
+            $response['dpdPickupBy'] = $data->getDpdPickupBy();
         }
 
         if (null !== $data->getDpdDepotCode()) {
@@ -115,8 +119,12 @@ class ShipmentSerializer implements SerializerInterface
             $shipment->setId($data['id']);
         }
 
-        if (isset($data['dpdNumber'])) {
-            $shipment->setDpdNumber($data['dpdNumber']);
+        if (isset($data['dpdCustomerNumber'])) {
+            $shipment->setDpdNumber($data['dpdCustomerNumber']);
+        }
+
+        if (isset($data['dpdPickupBy'])) {
+            $shipment->setDpdNumber($data['dpdPickupBy']);
         }
 
         if (isset($data['dpdDepotCode'])) {

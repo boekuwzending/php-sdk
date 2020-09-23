@@ -74,6 +74,11 @@ class Shipment
     protected $dpdDepotCode;
 
     /**
+     * @var string|null
+     */
+    protected $dpdPickupBy;
+
+    /**
      * @var DispatchInstruction
      */
     protected $dispatch;
@@ -433,5 +438,21 @@ class Shipment
     public function setPickupPoint(?PickupPoint $pickupPoint): void
     {
         $this->pickupPoint = $pickupPoint;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDpdPickupBy(): ?string
+    {
+        return $this->dpdPickupBy;
+    }
+
+    /**
+     * @param string|null $dpdPickupBy
+     */
+    public function setDpdPickupBy(?string $dpdPickupBy): void
+    {
+        $this->dpdPickupBy = $dpdPickupBy;
     }
 }
