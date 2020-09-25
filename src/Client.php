@@ -6,6 +6,8 @@ namespace Boekuwzending;
 
 use Boekuwzending\Endpoints\LabelEndpoint;
 use Boekuwzending\Endpoints\MeEndpoint;
+use Boekuwzending\Endpoints\RateEndpoint;
+use Boekuwzending\Endpoints\ServiceEndpoint;
 use Boekuwzending\Endpoints\ShipmentEndpoint;
 use Boekuwzending\Endpoints\TrackAndTraceEndpoint;
 use Boekuwzending\Exception\AuthorizationFailedException;
@@ -71,6 +73,16 @@ class Client
      * @var TrackAndTraceEndpoint
      */
     public $trackAndTrace;
+
+    /**
+     * @var ServiceEndpoint
+     */
+    public $service;
+
+    /**
+     * @var RateEndpoint
+     */
+    public $rates;
 
     /**
      * @var array
@@ -173,6 +185,8 @@ class Client
         $this->shipment = new ShipmentEndpoint($this, $serializer);
         $this->trackAndTrace = new TrackAndTraceEndpoint($this, $serializer);
         $this->label = new LabelEndpoint($this, $serializer);
+        $this->service = new ServiceEndpoint($this, $serializer);
+        $this->rates = new RateEndpoint($this, $serializer);
     }
 
     /**

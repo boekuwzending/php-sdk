@@ -17,6 +17,8 @@ use Boekuwzending\Resource\Matrix;
 use Boekuwzending\Resource\MatrixRate;
 use Boekuwzending\Resource\Me;
 use Boekuwzending\Resource\PickupPoint;
+use Boekuwzending\Resource\Rate;
+use Boekuwzending\Resource\RateService;
 use Boekuwzending\Resource\Service;
 use Boekuwzending\Resource\Shipment;
 use Boekuwzending\Resource\TrackAndTrace;
@@ -53,7 +55,9 @@ class Serializer implements SerializerInterface
             TrackAndTrace::class => new TrackAndTraceSerializer(),
             TrackingDetail::class => new TrackingDetailSerializer(),
             Distributor::class => new DistributorSerializer(),
-            PickupPoint::class => new PickupPointSerializer()
+            PickupPoint::class => new PickupPointSerializer(),
+            Rate::class => new RateSerializer(),
+            RateService::class => new RateServiceSerializer()
         ];
     }
 
