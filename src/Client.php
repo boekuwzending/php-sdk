@@ -6,6 +6,7 @@ namespace Boekuwzending;
 
 use Boekuwzending\Endpoints\LabelEndpoint;
 use Boekuwzending\Endpoints\MeEndpoint;
+use Boekuwzending\Endpoints\OrderEndpoint;
 use Boekuwzending\Endpoints\RateEndpoint;
 use Boekuwzending\Endpoints\ServiceEndpoint;
 use Boekuwzending\Endpoints\ShipmentEndpoint;
@@ -83,6 +84,11 @@ class Client
      * @var RateEndpoint
      */
     public $rates;
+
+    /**
+     * @var OrderEndpoint
+     */
+    public $order;
 
     /**
      * @var array
@@ -187,6 +193,7 @@ class Client
         $this->label = new LabelEndpoint($this, $serializer);
         $this->service = new ServiceEndpoint($this, $serializer);
         $this->rates = new RateEndpoint($this, $serializer);
+        $this->order = new OrderEndpoint($this, $serializer);
     }
 
     /**

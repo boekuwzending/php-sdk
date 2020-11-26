@@ -27,7 +27,7 @@ class OrderLine {
     protected $description;
 
     /**
-     * @var Dimensions
+     * @var Dimensions|null
      */
     protected $dimensions;
 
@@ -103,9 +103,9 @@ class OrderLine {
     }
 
     /**
-     * @return Dimensions
+     * @return Dimensions|null
      */
-    public function getDimensions(): Dimensions
+    public function getDimensions(): ?Dimensions
     {
         return $this->dimensions;
     }
@@ -119,9 +119,9 @@ class OrderLine {
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getWeight(): float
+    public function getWeight(): ?float
     {
         return $this->weight;
     }

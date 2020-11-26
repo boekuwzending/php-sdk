@@ -21,8 +21,8 @@ class OrderLineSerializer implements SerializerInterface
         return [
             'externalId' => $data->getExternalId(),
             'quantity' => $data->getQuantity(),
-            'dimensions' => $serializer->serialize($data->getDimensions()),
-            'weight' => $data->getWeight(),
+            'dimensions' => $data->getDimensions() ? $serializer->serialize($data->getDimensions()) : null,
+            'weight' => $data->getWeight() ?? 1,
             'description' => $data->getDescription(),
             'value' => $data->getValue(),
             'tariffNumber' => $data->getTariffNumber(),

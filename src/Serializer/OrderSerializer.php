@@ -6,6 +6,8 @@ use Boekuwzending\Resource\Address;
 use Boekuwzending\Resource\Contact;
 use Boekuwzending\Resource\Order;
 use Boekuwzending\Resource\OrderLine;
+use DateTime;
+use Exception;
 
 /**
  * Class OrderSerializer
@@ -28,7 +30,7 @@ class OrderSerializer implements SerializerInterface
         return [
             'externalId' => $data->getExternalId(),
             'reference' => $data->getReference(),
-            'createdAtSource' => $data->getCreatedAtSource(),
+            'createdAtSource' => $data->getCreatedAtSource()->format('Y-m-d H:i:s'),
             'orderLines' => $lines,
             'shipTo' => [
                 'contact' => $serializer->serialize($data->getShipToContact()),
@@ -41,6 +43,7 @@ class OrderSerializer implements SerializerInterface
      * @param array $data
      * @param string $dataType
      * @return Order
+     * @throws Exception
      */
     public function deserialize(array $data, string $dataType): Order
     {
@@ -54,7 +57,7 @@ class OrderSerializer implements SerializerInterface
         $order = new Order();
         $order->setExternalId($data['externalId']);
         $order->setReference($data['reference']);
-        $order->setCreatedAtSource($data['createdAtSource']);
+        $order->setCreatedAtSource(new DateTime($data['createdAtSource']));
         $order->setOrderLines($lines);
         $order->setShipToContact($serializer->deserialize($data['shipTo']['contact'], Contact::class));
         $order->setShipToAddress($serializer->deserialize($data['shipTo']['address'], Address::class));
