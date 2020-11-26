@@ -16,6 +16,8 @@ use Boekuwzending\Resource\Label;
 use Boekuwzending\Resource\Matrix;
 use Boekuwzending\Resource\MatrixRate;
 use Boekuwzending\Resource\Me;
+use Boekuwzending\Resource\Order;
+use Boekuwzending\Resource\OrderLine;
 use Boekuwzending\Resource\PickupPoint;
 use Boekuwzending\Resource\Rate;
 use Boekuwzending\Resource\RateService;
@@ -57,7 +59,9 @@ class Serializer implements SerializerInterface
             Distributor::class => new DistributorSerializer(),
             PickupPoint::class => new PickupPointSerializer(),
             Rate::class => new RateSerializer(),
-            RateService::class => new RateServiceSerializer()
+            RateService::class => new RateServiceSerializer(),
+            OrderLine::class => new OrderLineSerializer(),
+            Order::class => new OrderSerializer()
         ];
     }
 
