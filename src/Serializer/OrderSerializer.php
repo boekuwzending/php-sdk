@@ -54,7 +54,7 @@ class OrderSerializer implements SerializerInterface
             $lines[] = $serializer->deserialize($line, OrderLine::class);
         }
 
-        $order = new Order();
+        $order = new Order($data['id']);
         $order->setExternalId($data['externalId']);
         $order->setReference($data['reference']);
         $order->setCreatedAtSource(new DateTime($data['createdAtSource']));
