@@ -10,7 +10,7 @@ namespace Boekuwzending\Resource;
 class Address
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $street;
 
@@ -42,6 +42,11 @@ class Address
     /**
      * @var string|null
      */
+    protected $addressLine1;
+
+    /**
+     * @var string|null
+     */
     protected $addressLine2;
 
     /**
@@ -62,7 +67,7 @@ class Address
     /**
      * @return string|null
      */
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         return $this->street;
     }
@@ -70,7 +75,7 @@ class Address
     /**
      * @param string|null $street
      */
-    public function setStreet(string $street): void
+    public function setStreet(?string $street): void
     {
         $this->street = $street;
     }
@@ -217,5 +222,21 @@ class Address
     public function setAccessibleWithTrailer(bool $accessibleWithTrailer): void
     {
         $this->accessibleWithTrailer = $accessibleWithTrailer;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAddressLine1(): ?string
+    {
+        return $this->addressLine1;
+    }
+
+    /**
+     * @param string|null $addressLine1
+     */
+    public function setAddressLine1(?string $addressLine1): void
+    {
+        $this->addressLine1 = $addressLine1;
     }
 }
