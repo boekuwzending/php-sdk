@@ -22,6 +22,7 @@ class AddressSerializer implements SerializerInterface
             'number' => $data->getNumber(),
             'street' => $data->getStreet(),
             'numberAddition' => $data->getNumberAddition(),
+            'addressLine1' => $data->getAddressLine1(),
             'addressLine2' => $data->getAddressLine2(),
             'postcode' => $data->getPostcode(),
             'city' => $data->getCity(),
@@ -46,6 +47,10 @@ class AddressSerializer implements SerializerInterface
 
         if (isset($data['numberAddition'])) {
            $address->setNumberAddition($data['numberAddition']);
+        }
+
+        if(isset($data['addressLine1'])) {
+            $address->setAddressLine2($data['addressLine1']);
         }
 
         if(isset($data['addressLine2'])) {
