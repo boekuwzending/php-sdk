@@ -124,6 +124,11 @@ class Shipment
     protected $pickupPoint;
 
     /**
+     * @var string|null
+     */
+    protected $labelPdfData;
+
+    /**
      * @return string|null
      */
     public function getId(): ?string
@@ -454,5 +459,21 @@ class Shipment
     public function setDpdPickupBy(?string $dpdPickupBy): void
     {
         $this->dpdPickupBy = $dpdPickupBy;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLabelPdfData(): ?string
+    {
+        return $this->labelPdfData;
+    }
+
+    /**
+     * @param string|null $labelPdfData
+     */
+    public function setLabelPdfData(?string $labelPdfData): void
+    {
+        $this->labelPdfData = $labelPdfData;
     }
 }

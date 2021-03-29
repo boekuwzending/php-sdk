@@ -156,6 +156,10 @@ class ShipmentSerializer implements SerializerInterface
             $shipment->setPickupPoint($serializer->deserialize($data['pickupPoint'], PickupPoint::class));
         }
 
+        if (isset($data['labelPdfData'])) {
+           $shipment->setLabelPdfData($data['labelPdfData']);
+        }
+
         return $shipment;
     }
 }

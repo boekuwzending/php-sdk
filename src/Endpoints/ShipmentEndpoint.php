@@ -31,17 +31,20 @@ class ShipmentEndpoint extends AbstractEndpoint
 
     /**
      * @param Shipment $shipment
-     *
+     * @param bool $withPdfLabelData
      * @return Shipment
      * @throws AuthorizationFailedException
      * @throws RequestFailedException
      */
-    public function create(Shipment $shipment): Shipment
+    public function create(Shipment $shipment, $withPdfLabelData = false): Shipment
     {
+        $query = $withPdfLabelData ? ['withLabelPdfData' => 1] : [];
+
         $data = $this->client->request(
             '/shipments',
             Client::METHOD_POST,
-            $this->serializer->serialize($shipment)
+            $this->serializer->serialize($shipment),
+            $query
         );
 
         return $this->serializer->deserialize($data, Shipment::class);
