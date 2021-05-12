@@ -8,64 +8,64 @@ namespace Boekuwzending\Resource;
 class Dimensions
 {
     /**
-     * @var int
+     * @var float|null
      */
     protected $length;
 
     /**
-     * @var int
+     * @var float|null
      */
     protected $width;
 
     /**
-     * @var int
+     * @var float|null
      */
     protected $height;
 
     /**
-     * @return int
+     * @return float|null
      */
-    public function getLength(): int
+    public function getLength(): ?float
     {
         return $this->length;
     }
 
     /**
-     * @param int $length
+     * @param float|null $length
      */
-    public function setLength(int $length): void
+    public function setLength(?float $length): void
     {
         $this->length = $length;
     }
 
     /**
-     * @return int
+     * @return float|null
      */
-    public function getWidth(): int
+    public function getWidth(): ?float
     {
         return $this->width;
     }
 
     /**
-     * @param int $width
+     * @param float|null $width
      */
-    public function setWidth(int $width): void
+    public function setWidth(?float $width): void
     {
         $this->width = $width;
     }
 
     /**
-     * @return int
+     * @return float|null
      */
-    public function getHeight(): int
+    public function getHeight(): ?float
     {
         return $this->height;
     }
 
     /**
-     * @param int $height
+     * @param float|null $height
      */
-    public function setHeight(int $height): void
+    public function setHeight(?float $height): void
     {
         $this->height = $height;
     }
