@@ -29,9 +29,18 @@ class DimensionsSerializer implements SerializerInterface
     public function deserialize(array $data, string $dataType): Dimensions
     {
         $dimensions = new Dimensions();
-        $dimensions->setLength($data['length']);
-        $dimensions->setHeight($data['height']);
-        $dimensions->setWidth($data['width']);
+
+        if (true === array_key_exists('length', $data)) {
+            $dimensions->setLength($data['length']);
+        }
+
+        if (true === array_key_exists('height', $data)) {
+            $dimensions->setHeight($data['height']);
+        }
+
+        if (true === array_key_exists('width', $data)) {
+            $dimensions->setWidth($data['width']);
+        }
 
         return $dimensions;
     }
