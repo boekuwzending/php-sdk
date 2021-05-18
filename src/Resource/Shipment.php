@@ -337,6 +337,14 @@ class Shipment
     }
 
     /**
+     * @param Item $item
+     */
+    public function addItem(Item $item): void
+    {
+        $this->items[] = $item;
+    }
+
+    /**
      * @return string|null
      */
     public function getSequence(): ?string
