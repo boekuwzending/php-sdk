@@ -31,6 +31,7 @@ class ItemSerializer implements SerializerInterface
             'value' => $data->getValue(),
             'tariffNumber' => $data->getTariffNumber(),
             'countryOfOrigin' => $data->getCountryOfOrigin(),
+            'customerReference' => $data->getCustomerReference(),
         ];
 
         if (null !== $data->isStackable()) {
