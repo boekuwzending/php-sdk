@@ -158,6 +158,13 @@ class Client
             $this->authorize();
         }
 
+        // Trim all to-be-posted string values
+        array_walk_recursive($body, static function(&$value) {
+            if (is_string($value)) {
+                $value = trim($value);
+            }
+        });
+
         try {
             $response = $this->httpClient->request($method, $url, [
                 'headers' => [
