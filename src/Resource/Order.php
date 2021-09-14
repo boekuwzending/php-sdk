@@ -35,7 +35,7 @@ class Order
     protected $orderLines;
 
     /**
-     * @var Contact
+     * @var OrderContact
      */
     protected $shipToContact;
 
@@ -122,17 +122,17 @@ class Order
     }
 
     /**
-     * @return Contact
+     * @return OrderContact
      */
-    public function getShipToContact(): Contact
+    public function getShipToContact(): OrderContact
     {
         return $this->shipToContact;
     }
 
     /**
-     * @param Contact $shipToContact
+     * @param OrderContact $shipToContact
      */
-    public function setShipToContact(Contact $shipToContact): void
+    public function setShipToContact(OrderContact $shipToContact): void
     {
         $this->shipToContact = $shipToContact;
     }

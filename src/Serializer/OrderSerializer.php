@@ -3,7 +3,7 @@
 namespace Boekuwzending\Serializer;
 
 use Boekuwzending\Resource\Address;
-use Boekuwzending\Resource\Contact;
+use Boekuwzending\Resource\OrderContact;
 use Boekuwzending\Resource\Order;
 use Boekuwzending\Resource\OrderLine;
 use DateTime;
@@ -59,7 +59,7 @@ class OrderSerializer implements SerializerInterface
         $order->setReference($data['reference']);
         $order->setCreatedAtSource(new DateTime($data['createdAtSource']));
         $order->setOrderLines($lines);
-        $order->setShipToContact($serializer->deserialize($data['shipTo']['contact'], Contact::class));
+        $order->setShipToContact($serializer->deserialize($data['shipTo']['contact'], OrderContact::class));
         $order->setShipToAddress($serializer->deserialize($data['shipTo']['address'], Address::class));
 
         return $order;

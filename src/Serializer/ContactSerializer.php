@@ -39,6 +39,14 @@ class ContactSerializer implements SerializerInterface
     public function deserialize(array $data, string $dataType)
     {
         $contact = new Contact();
+
+        $this->populate($contact, $data);
+
+        return $contact;
+    }
+
+    protected function populate(Contact $contact, array $data): void
+    {
         $contact->setName($data['name']);
         $contact->setEmailAddress($data['emailAddress']);
 
@@ -49,7 +57,5 @@ class ContactSerializer implements SerializerInterface
         if(isset($data['company'])) {
             $contact->setCompany($data['company']);
         }
-
-        return $contact;
     }
 }

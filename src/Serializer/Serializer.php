@@ -17,6 +17,7 @@ use Boekuwzending\Resource\Matrix;
 use Boekuwzending\Resource\MatrixRate;
 use Boekuwzending\Resource\Me;
 use Boekuwzending\Resource\Order;
+use Boekuwzending\Resource\OrderContact;
 use Boekuwzending\Resource\OrderLine;
 use Boekuwzending\Resource\PickupPoint;
 use Boekuwzending\Resource\Rate;
@@ -60,6 +61,7 @@ class Serializer implements SerializerInterface
             PickupPoint::class => new PickupPointSerializer(),
             Rate::class => new RateSerializer(),
             RateService::class => new RateServiceSerializer(),
+            OrderContact::class => new OrderContactSerializer(),
             OrderLine::class => new OrderLineSerializer(),
             Order::class => new OrderSerializer()
         ];
