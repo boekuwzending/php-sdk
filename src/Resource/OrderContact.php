@@ -10,12 +10,12 @@ namespace Boekuwzending\Resource;
 class OrderContact extends Contact
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $plainPhoneNumber;
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getPlainPhoneNumber(): string
     {
@@ -23,9 +23,9 @@ class OrderContact extends Contact
     }
 
     /**
-     * @param string $plainPhoneNumber
+     * @param string|null $plainPhoneNumber
      */
-    public function setPlainPhoneNumber(string $plainPhoneNumber): void
+    public function setPlainPhoneNumber(?string $plainPhoneNumber): void
     {
         $this->plainPhoneNumber = $plainPhoneNumber;
     }
