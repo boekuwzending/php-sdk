@@ -27,7 +27,7 @@ class ClientFactory
     {
         $baseUriOverride = getenv('BUZ_API_URL');
 
-        $httpClientOptions = array();
+        $httpClientOptions = [];
 
         if (false !== $baseUriOverride && '' !== $baseUriOverride) {
             $baseUri = $baseUriOverride;
