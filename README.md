@@ -29,5 +29,5 @@ $client = Boekuwzending\ClientFactory::build('Your API client ID', 'Your API cli
 Asking the API for tracking for a specific shipment:
 
 ```php
-$client->tracking->get('c45db117-4b06-43d4-ac5f-11afce96a168');
+$client->trackAndTrace->get('c45db117-4b06-43d4-ac5f-11afce96a168');
 ```
