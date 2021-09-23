@@ -6,9 +6,9 @@ namespace Boekuwzending\Tests\Endpoints;
 
 use Boekuwzending\Client;
 use Boekuwzending\Endpoints\ShipmentEndpoint;
-use Boekuwzending\Endpoints\TrackingEndpoint;
+use Boekuwzending\Endpoints\TrackAndTraceEndpoint;
 use Boekuwzending\Resource\Shipment;
-use Boekuwzending\Resource\Tracking;
+use Boekuwzending\Resource\TrackAndTrace;
 use Boekuwzending\Serializer\Serializer;
 use Boekuwzending\Tests\FakerTrait;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -44,16 +44,16 @@ class TrackingEndpointTest extends TestCase
 
         $this->clientMock
             ->method('request')
-            ->with(sprintf('/trackings/%s', $id), 'GET')
+            ->with(sprintf('/track-and-trace/%s', $id), 'GET')
             ->willReturn($apiResponse);
 
         $this->serializerMock
             ->method('deserialize')
-            ->with($apiResponse, Tracking::class)
+            ->with($apiResponse, TrackAndTrace::class)
             ->willReturn($this->trackingMock);
 
         // Act
-        $endpoint = new TrackingEndpoint($this->clientMock, $this->serializerMock);
+        $endpoint = new TrackAndTraceEndpoint($this->clientMock, $this->serializerMock);
         $response = $endpoint->get($id);
 
         // Assert
@@ -66,6 +66,6 @@ class TrackingEndpointTest extends TestCase
 
         $this->clientMock = $this->createMock(Client::class);
         $this->serializerMock = $this->createMock(Serializer::class);
-        $this->trackingMock = $this->createMock(Tracking::class);
+        $this->trackingMock = $this->createMock(TrackAndTrace::class);
     }
 }

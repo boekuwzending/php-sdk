@@ -61,22 +61,36 @@ class ShipmentEndpointTest extends TestCase
     public function testCreate()
     {
         // Arrange
-        $serializedShipment = ['foo' => 'bar'];
+        $serializedShipment = [
+            'sequence' => '12345',
+            'service' => 'PostNL',
+        ];
+
+        $shipment = new Shipment();
+        $shipment->setSequence($serializedShipment['sequence']);
+        $shipment->setService($serializedShipment['service']);
 
         $this->serializerMock
             ->expects($this->once())
             ->method('serialize')
-            ->with($this->shipmentMock)
+            ->with($shipment)
             ->willReturn($serializedShipment);
+
+        $this->serializerMock
+            ->expects($this->once())
+            ->method('deserialize')
+            ->with($serializedShipment)
+            ->willReturn($shipment);
 
         $this->clientMock
             ->expects($this->once())
             ->method('request')
-            ->with('/shipments', 'POST', $serializedShipment);
+            ->with('/shipments', 'POST', $serializedShipment)
+            ->willReturn($serializedShipment);
 
         // Act
         $endpoint = new ShipmentEndpoint($this->clientMock, $this->serializerMock);
-        $endpoint->create($this->shipmentMock);
+        $endpoint->create($shipment);
     }
 
     public function setUp()

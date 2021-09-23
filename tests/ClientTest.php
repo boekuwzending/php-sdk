@@ -73,8 +73,10 @@ class ClientTest extends TestCase
             ->with('GET', $endpoint, [
                 'headers' => [
                     'Authorization' => sprintf('Bearer %s', $accessToken),
+                    'User-Agent' => ''
                 ],
                 'json' => [],
+                'query' => [],
             ])
             ->willReturn($this->responseMock);
 
