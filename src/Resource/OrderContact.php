@@ -21,7 +21,7 @@ class OrderContact extends Contact
     /**
      * @return string|null
      */
-    public function getPlainPhoneNumber(): string
+    public function getPlainPhoneNumber(): ?string
     {
         return $this->plainPhoneNumber;
     }
