@@ -97,17 +97,17 @@ class Matrix
     }
 
     /**
-     * @return int
+     * @return float|null
      */
-    public function getMaxWeight(): int
+    public function getMaxWeight(): ?float
     {
         return $this->maxWeight;
     }
 
     /**
-     * @param int $maxWeight
+     * @param float|null $maxWeight
      */
-    public function setMaxWeight(int $maxWeight): void
+    public function setMaxWeight(?float $maxWeight): void
     {
         $this->maxWeight = $maxWeight;
     }
