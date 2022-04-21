@@ -48,37 +48,38 @@ class ClientTest extends TestCase
         $accessToken = 'test_accessToken';
 
         $this->httpClientMock
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('request')
-            ->with(
-                'POST',
-                '/token',
+            ->withConsecutive(
                 [
-                    'body' => [
-                        'grant_type' => 'client_credentials',
-                        'client_id' => $clientId,
-                        'client_secret' => $clientSecret,
-                    ],
+                    'POST',
+                    '/token',
+                    [
+                        'body' => [
+                            'grant_type' => 'client_credentials',
+                            'client_id' => $clientId,
+                            'client_secret' => $clientSecret,
+                        ],
+                    ]
+                ],
+                [
+                    'GET',
+                    $endpoint,
+                    [
+                        'headers' => [
+                            'Authorization' => sprintf('Bearer %s', $accessToken),
+                            'User-Agent' => ''
+                        ],
+                        'json' => [],
+                        'query' => [],
+                    ]
                 ]
             )
-            ->willReturn($this->authorizationResponseMock);
+            ->willReturnOnConsecutiveCalls($this->authorizationResponseMock, $this->responseMock);
 
         $this->authorizationResponseMock
             ->method('getContent')
             ->willReturn(sprintf('{"access_token":"%s"}', $accessToken));
-
-        $this->httpClientMock
-            ->expects($this->at(1))
-            ->method('request')
-            ->with('GET', $endpoint, [
-                'headers' => [
-                    'Authorization' => sprintf('Bearer %s', $accessToken),
-                    'User-Agent' => ''
-                ],
-                'json' => [],
-                'query' => [],
-            ])
-            ->willReturn($this->responseMock);
 
         $this->responseMock
             ->method('getContent')
@@ -111,7 +112,7 @@ class ClientTest extends TestCase
         $clientSecret = 'test_clientSecret';
 
         $this->httpClientMock
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('request')
             ->with(
                 'POST',
@@ -136,8 +137,6 @@ class ClientTest extends TestCase
 
     public function setUp(): void
     {
-        parent::setUp();
-
         $this->httpClientMock = $this->createMock(HttpClientInterface::class);
         $this->authorizationResponseMock = $this->createMock(ResponseInterface::class);
         $this->responseMock = $this->createMock(ResponseInterface::class);

@@ -34,7 +34,7 @@ class MeEndpointTest extends TestCase
      */
     private $meMock;
 
-    public function testGet()
+    public function testGet(): void
     {
         // Arrange
         $id = $this->getFaker()->uuid;
@@ -60,7 +60,7 @@ class MeEndpointTest extends TestCase
         $this->assertSame($this->meMock, $response);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->clientMock = $this->createMock(Client::class);
         $this->serializerMock = $this->createMock(Serializer::class);

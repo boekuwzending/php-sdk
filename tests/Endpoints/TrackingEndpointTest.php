@@ -32,11 +32,11 @@ class TrackingEndpointTest extends TestCase
     private $serializerMock;
 
     /**
-     * @var Tracking|MockObject
+     * @var TrackAndTrace|MockObject
      */
     private $trackingMock;
 
-    public function testGet()
+    public function testGet(): void
     {
         // Arrange
         $id = $this->getFaker()->uuid;
@@ -60,10 +60,8 @@ class TrackingEndpointTest extends TestCase
         $this->assertSame($this->trackingMock, $response);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
-        parent::setUp();
-
         $this->clientMock = $this->createMock(Client::class);
         $this->serializerMock = $this->createMock(Serializer::class);
         $this->trackingMock = $this->createMock(TrackAndTrace::class);
