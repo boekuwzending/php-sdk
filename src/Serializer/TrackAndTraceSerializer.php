@@ -42,8 +42,11 @@ class TrackAndTraceSerializer implements SerializerInterface
         }
 
         $trackingDetail->setDetails($details);
-        $trackingDetail->setDistributor($serializer->deserialize($data['distributor'], Distributor::class));
 
+        if (null !== $data['distributor']) {
+            $trackingDetail->setDistributor($serializer->deserialize($data['distributor'], Distributor::class));
+        }
+        
         return $trackingDetail;
     }
 }
