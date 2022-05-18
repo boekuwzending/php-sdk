@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Boekuwzending;
 
+use Boekuwzending\Endpoints\IntegrationEndpoint;
 use Boekuwzending\Endpoints\LabelEndpoint;
 use Boekuwzending\Endpoints\MeEndpoint;
 use Boekuwzending\Endpoints\OrderEndpoint;
@@ -28,6 +29,8 @@ class Client
 {
     public const METHOD_GET = 'GET';
     public const METHOD_POST = 'POST';
+    public const METHOD_PUT = 'PUT';
+    public const METHOD_DELETE = 'DELETE';
 
     public const ENVIRONMENT_LIVE = 'live';
     public const ENVIRONMENT_STAGING = 'staging';
@@ -91,6 +94,11 @@ class Client
     public $order;
 
     /**
+     * @var IntegrationEndpoint
+     */
+    public $integration;
+
+    /**
      * @var array
      */
     private $additionalUserAgents = [];
@@ -116,6 +124,11 @@ class Client
     {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
+    }
+
+    public function setAccessToken(string $accessToken): void
+    {
+        $this->accessToken = $accessToken;
     }
 
     /**
@@ -169,7 +182,7 @@ class Client
             $response = $this->httpClient->request($method, $url, [
                 'headers' => [
                     'Authorization' => sprintf('Bearer %s', $this->accessToken),
-                    'User-Agent' => implode(' ', $this->additionalUserAgents)
+                    'User-Agent' => implode(' ', $this->additionalUserAgents),
                 ],
                 'json' => $body,
                 'query' => $query
@@ -201,6 +214,7 @@ class Client
         $this->service = new ServiceEndpoint($this, $serializer);
         $this->rates = new RateEndpoint($this, $serializer);
         $this->order = new OrderEndpoint($this, $serializer);
+        $this->integration = new IntegrationEndpoint($this, $serializer);
     }
 
     /**
