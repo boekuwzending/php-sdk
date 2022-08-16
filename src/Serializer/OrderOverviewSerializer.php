@@ -25,7 +25,7 @@ class OrderOverviewSerializer implements SerializerInterface
     /**
      * @param array $data
      * @param string $dataType
-     * @return Order
+     * @return OrderOverview
      * @throws Exception
      */
     public function deserialize(array $data, string $dataType): OrderOverview
@@ -34,6 +34,7 @@ class OrderOverviewSerializer implements SerializerInterface
 
         $order->setExternalId($data['externalId']);
         $order->setReference($data['reference']);
+        $order->setArchived($data['archived']);
 
         return $order;
     }

@@ -42,18 +42,21 @@ class OrderEndpoint extends AbstractEndpoint
     }
 
     /**
-     * @return array<Order>
+     * @return array<OrderOverview>
      *
      * @throws AuthorizationFailedException
      * @throws RequestFailedException
      */
-    public function findByExternalId(string $externalId): array
+    public function findByExternalId(string $externalId, bool $includeArchived = true): array
     {
         $data = $this->client->request(
             '/orders',
             Client::METHOD_GET,
             [],
-            ['externalId' => $externalId]
+            [
+                'externalId' => $externalId,
+                'includeArchived' => $includeArchived
+            ]
         );
 
         $orders = [];
@@ -88,7 +91,7 @@ class OrderEndpoint extends AbstractEndpoint
     {
         $this->client->request(
             '/orders/'.$order->getId(),
-            Client::METHOD_DELETE,
+            Client::METHOD_DELETE
         );
     }
 }

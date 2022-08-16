@@ -22,6 +22,11 @@ class OrderOverview
      */
     protected $reference;
 
+    /**
+     * @var bool
+     */
+    protected $archived;
+
     public function __construct($id = null)
     {
         $this->id = $id;
@@ -65,5 +70,21 @@ class OrderOverview
     public function setReference(?string $reference): void
     {
         $this->reference = $reference;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isArchived(): bool
+    {
+        return $this->archived;
+    }
+
+    /**
+     * @param bool $archived
+     */
+    public function setArchived(bool $archived): void
+    {
+        $this->archived = $archived;
     }
 }
