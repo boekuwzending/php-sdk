@@ -15,6 +15,11 @@ class Order
     protected $id;
 
     /**
+     * @var bool
+     */
+    protected $archived;
+
+    /**
      * @var string
      */
     protected $externalId;
@@ -151,5 +156,21 @@ class Order
     public function setShipToAddress(Address $shipToAddress): void
     {
         $this->shipToAddress = $shipToAddress;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isArchived(): bool
+    {
+        return $this->archived;
+    }
+
+    /**
+     * @param bool $archived
+     */
+    public function setArchived(bool $archived): void
+    {
+        $this->archived = $archived;
     }
 }
