@@ -36,7 +36,7 @@ class ClientFactory
      */
     public static function buildClient(string $environment = Client::ENVIRONMENT_LIVE): Client
     {
-        $baseUriOverride = getenv('BUZ_API_URL');
+        $baseUriOverride = getenv('BUZ_API_BASE_URL');
 
         $httpClientOptions = [];
 
