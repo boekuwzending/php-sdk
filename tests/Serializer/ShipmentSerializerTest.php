@@ -15,7 +15,7 @@ class ShipmentSerializerTest extends TestCase
 {
     use FakerTrait;
 
-    public function testShipment()
+    public function testShipment(): void
     {
         $shipmentItem = new Item();
         $shipmentItem->setCustomerReference('Hello');

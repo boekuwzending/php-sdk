@@ -6,6 +6,7 @@ namespace Boekuwzending\Serializer;
 
 use Boekuwzending\Exception\SerializerNotFoundException;
 use Boekuwzending\Resource\Address;
+use Boekuwzending\Resource\ClientCredentials;
 use Boekuwzending\Resource\Contact;
 use Boekuwzending\Resource\DeliveryInstruction;
 use Boekuwzending\Resource\Dimensions;
@@ -19,11 +20,14 @@ use Boekuwzending\Resource\Me;
 use Boekuwzending\Resource\Order;
 use Boekuwzending\Resource\OrderContact;
 use Boekuwzending\Resource\OrderLine;
+use Boekuwzending\Resource\OrderOverview;
 use Boekuwzending\Resource\PickupPoint;
 use Boekuwzending\Resource\Rate;
 use Boekuwzending\Resource\RateService;
+use Boekuwzending\Resource\Relation;
 use Boekuwzending\Resource\Service;
 use Boekuwzending\Resource\Shipment;
+use Boekuwzending\Resource\ShopifyIntegration;
 use Boekuwzending\Resource\TrackAndTrace;
 use Boekuwzending\Resource\TrackingDetail;
 
@@ -46,6 +50,7 @@ class Serializer implements SerializerInterface
             Shipment::class => new ShipmentSerializer(),
             Contact::class => new ContactSerializer(),
             Address::class => new AddressSerializer(),
+            ClientCredentials::class => new ClientSerializer(),
             DispatchInstruction::class => new InstructionSerializer(),
             DeliveryInstruction::class => new InstructionSerializer(),
             Item::class => new ItemSerializer(),
@@ -61,9 +66,12 @@ class Serializer implements SerializerInterface
             PickupPoint::class => new PickupPointSerializer(),
             Rate::class => new RateSerializer(),
             RateService::class => new RateServiceSerializer(),
+            Relation::class => new RelationSerializer(),
+            ShopifyIntegration::class => new IntegrationSerializer(),
             OrderContact::class => new OrderContactSerializer(),
             OrderLine::class => new OrderLineSerializer(),
-            Order::class => new OrderSerializer()
+            Order::class => new OrderSerializer(),
+            OrderOverview::class => new OrderOverviewSerializer(),
         ];
     }
 

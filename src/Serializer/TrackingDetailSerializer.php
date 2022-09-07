@@ -35,7 +35,11 @@ class TrackingDetailSerializer implements SerializerInterface
         $trackingDetail->setCode($data['code']);
         $trackingDetail->setStatus($data['status']);
         $trackingDetail->setDescription($data['description']);
-        $trackingDetail->setDate(new DateTime($data['date']));
+
+        // API versioning: v2.
+        if (array_key_exists('datetime', $data)) {
+            $trackingDetail->setDate(new DateTime($data['datetime']));
+        }
 
         return $trackingDetail;
     }

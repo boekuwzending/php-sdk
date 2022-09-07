@@ -7,12 +7,11 @@ namespace Boekuwzending;
 use Boekuwzending\Serializer\Serializer;
 use Symfony\Component\HttpClient\HttpClient;
 
-/**
- * Class BuzApiClientFactory.
- */
 class ClientFactory
 {
     /**
+     * Builds a client that authenticates using client ID and secret.
+     *
      * @param string $clientId
      * @param string $clientSecret
      * @param string $environment
@@ -25,7 +24,19 @@ class ClientFactory
         string $environment = Client::ENVIRONMENT_LIVE
     ): Client
     {
-        $baseUriOverride = getenv('BUZ_API_URL');
+        $client = self::buildClient($environment);
+
+        $client->setCredentials($clientId, $clientSecret);
+
+        return $client;
+    }
+
+    /**
+     * Builds an unauthenticated client.
+     */
+    public static function buildClient(string $environment = Client::ENVIRONMENT_LIVE): Client
+    {
+        $baseUriOverride = getenv('BUZ_API_BASE_URL');
 
         $httpClientOptions = [];
 
@@ -39,9 +50,6 @@ class ClientFactory
         $serializer = new Serializer();
         $httpClient = HttpClient::createForBaseUri($baseUri, $httpClientOptions);
 
-        $client = new Client($httpClient, $serializer);
-        $client->setCredentials($clientId, $clientSecret);
-
-        return $client;
+        return new Client($httpClient, $serializer);
     }
 }

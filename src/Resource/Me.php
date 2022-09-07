@@ -25,6 +25,11 @@ class Me
     private $id;
 
     /**
+     * @var Relation|null
+     */
+    private $relation;
+
+    /**
      * @return string
      */
     public function getNumber(): ?string
@@ -67,5 +72,15 @@ class Me
     public function setId(string $id): void
     {
         $this->id = $id;
+    }
+
+    public function getRelation(): ?Relation
+    {
+        return $this->relation;
+    }
+
+    public function setRelation(?Relation $relation): void
+    {
+        $this->relation = $relation;
     }
 }

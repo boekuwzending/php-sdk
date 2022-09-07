@@ -34,7 +34,7 @@ class ShipmentEndpointTest extends TestCase
      */
     private $shipmentMock;
 
-    public function testGet()
+    public function testGet(): void
     {
         // Arrange
         $id = $this->getFaker()->uuid;
@@ -58,7 +58,7 @@ class ShipmentEndpointTest extends TestCase
         $this->assertSame($this->shipmentMock, $response);
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         // Arrange
         $serializedShipment = [
@@ -93,10 +93,8 @@ class ShipmentEndpointTest extends TestCase
         $endpoint->create($shipment);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
-        parent::setUp();
-
         $this->clientMock = $this->createMock(Client::class);
         $this->serializerMock = $this->createMock(Serializer::class);
         $this->shipmentMock = $this->createMock(Shipment::class);

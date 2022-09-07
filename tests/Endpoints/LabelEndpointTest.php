@@ -34,7 +34,7 @@ class LabelEndpointTest extends TestCase
      */
     private $labelMock;
 
-    public function testGet()
+    public function testGet(): void
     {
         // Arrange
         $id = $this->getFaker()->uuid;
@@ -60,7 +60,7 @@ class LabelEndpointTest extends TestCase
         $this->assertSame($this->labelMock, $response);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->clientMock = $this->createMock(Client::class);
         $this->serializerMock = $this->createMock(Serializer::class);

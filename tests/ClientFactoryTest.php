@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  */
 class ClientFactoryTest extends TestCase
 {
-    public function testBuild()
+    public function testBuild(): void
     {
         // Arrange
         $clientId = 'test_clientId';
