@@ -28,6 +28,8 @@ class InstructionSerializer implements SerializerInterface
                 'begin' => $data->getTimeWindowBegin(),
                 'end' => $data->getTimeWindowEnd(),
             ],
+            'vatNumber' => $data->getVatNumber(),
+            'eoriNumber' => $data->getEoriNumber(),
         ];
 
         if (null !== $data->getDate()) {
@@ -49,6 +51,8 @@ class InstructionSerializer implements SerializerInterface
         $object->setReference($data['reference']);
         $object->setTimeWindowBegin($data['timeWindow']['begin']);
         $object->setTimeWindowEnd($data['timeWindow']['end']);
+        $object->setVatNumber($data['vatNumber']);
+        $object->setEoriNumber($data['eoriNumber']);
 
         if (!empty($data['date'])) {
             $object->setDate((new DateTime($data['date'])));
