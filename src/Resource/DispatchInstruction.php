@@ -13,22 +13,22 @@ use DateTimeInterface;
 class DispatchInstruction extends Instruction
 {
     /**
-     * @var DateTimeInterface
+     * @var DateTimeInterface|null
      */
     protected $date;
 
     /**
-     * @return DateTimeInterface
+     * @return ?DateTimeInterface
      */
-    public function getDate(): DateTimeInterface
+    public function getDate(): ?DateTimeInterface
     {
         return $this->date;
     }
 
     /**
-     * @param DateTimeInterface $date
+     * @param DateTimeInterface|null $date
      */
-    public function setDate(DateTimeInterface $date): void
+    public function setDate(?DateTimeInterface $date): void
     {
         $this->date = $date;
     }

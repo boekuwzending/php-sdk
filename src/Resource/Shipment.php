@@ -79,7 +79,7 @@ class Shipment
     protected $dpdPickupBy;
 
     /**
-     * @var DispatchInstruction
+     * @var DispatchInstruction|null
      */
     protected $dispatch;
 
@@ -289,17 +289,17 @@ class Shipment
     }
 
     /**
-     * @return DispatchInstruction
+     * @return DispatchInstruction|null
      */
-    public function getDispatch(): DispatchInstruction
+    public function getDispatch(): ?DispatchInstruction
     {
         return $this->dispatch;
     }
 
     /**
-     * @param DispatchInstruction $dispatch
+     * @param DispatchInstruction|null $dispatch
      */
-    public function setDispatch(DispatchInstruction $dispatch): void
+    public function setDispatch(?DispatchInstruction $dispatch): void
     {
         $this->dispatch = $dispatch;
     }
