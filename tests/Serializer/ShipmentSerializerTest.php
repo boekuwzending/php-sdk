@@ -43,9 +43,11 @@ class ShipmentSerializerTest extends TestCase
         $addressTo->setCountryCode($this->getFaker()->countryCode);
         $shipment->setShipToAddress($addressTo);
 
-        // Set Dispactch
+        // Set Dispatch
         $dispatch = new DispatchInstruction();
         $dispatch->setDate($this->getFaker()->dateTime());
+        $dispatch->setEoriNumber($this->getFaker()->randomNumber(9));
+        $dispatch->setVatNumber($this->getFaker()->randomNumber(9));
         $shipment->setDispatch($dispatch);
 
         $serializedShipment = (new ShipmentSerializer())->serialize($shipment);
@@ -57,6 +59,8 @@ class ShipmentSerializerTest extends TestCase
 
         self::assertArrayHasKey('dispatch', $serializedShipment);
         self::assertArrayHasKey('date', $serializedShipment['dispatch']);
+        self::assertArrayHasKey('eoriNumber', $serializedShipment['dispatch']);
+        self::assertArrayHasKey('vatNumber', $serializedShipment['dispatch']);
 
         self::assertArrayHasKey('shipTo', $serializedShipment);
         self::assertArrayHasKey('contact', $serializedShipment['shipTo']);

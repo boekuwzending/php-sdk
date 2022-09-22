@@ -33,6 +33,16 @@ abstract class Instruction
     protected $timeWindowEnd;
 
     /**
+     * @var string|null
+     */
+    protected $vatNumber;
+
+    /**
+     * @var string|null
+     */
+    protected $eoriNumber;
+
+    /**
      * @return string|null
      */
     public function getInstructions(): ?string
@@ -94,5 +104,25 @@ abstract class Instruction
     public function setTimeWindowEnd(?DateTimeInterface $timeWindowEnd): void
     {
         $this->timeWindowEnd = $timeWindowEnd;
+    }
+
+    public function getVatNumber(): ?string
+    {
+        return $this->vatNumber;
+    }
+
+    public function setVatNumber(?string $vatNumber): void
+    {
+        $this->vatNumber = $vatNumber;
+    }
+
+    public function getEoriNumber(): ?string
+    {
+        return $this->eoriNumber;
+    }
+
+    public function setEoriNumber(?string $eoriNumber): void
+    {
+        $this->eoriNumber = $eoriNumber;
     }
 }
