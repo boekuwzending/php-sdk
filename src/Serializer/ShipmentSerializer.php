@@ -68,7 +68,7 @@ class ShipmentSerializer implements SerializerInterface
         }
 
         if (null !== $data->getDelivery()) {
-            $response['delivery'] = $data->getDelivery();
+            $response['delivery'] = $serializer->serialize($data->getDelivery());
         }
 
         if (!empty($data->getIncoTerms())) {
