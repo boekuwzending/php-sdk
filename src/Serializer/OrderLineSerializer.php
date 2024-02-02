@@ -26,6 +26,8 @@ class OrderLineSerializer implements SerializerInterface
             'description' => $data->getDescription(),
             'value' => $data->getValue(),
             'tariffNumber' => $data->getTariffNumber(),
+            'skuNumber' => $data->getSkuNumber(),
+            'eanNumber' => $data->getEanNumber(),
         ];
     }
 
@@ -48,6 +50,14 @@ class OrderLineSerializer implements SerializerInterface
 
         if(isset($data['tariffNumber'])) {
             $line->setTariffNumber($data['tariffNumber']);
+        }
+
+        if (isset($data['skuNumber'])) {
+            $line->setSkuNumber($data['skuNumber']);
+        }
+
+        if (isset($data['eanNumber'])) {
+            $line->setEanNumber($data['eanNumber']);
         }
 
         return $line;

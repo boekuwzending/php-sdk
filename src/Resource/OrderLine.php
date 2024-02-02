@@ -47,6 +47,16 @@ class OrderLine {
     protected $tariffNumber;
 
     /**
+     * @var string|null
+     */
+    protected $skuNumber;
+
+    /**
+     * @var string|null
+     */
+    protected $eanNumber;
+
+    /**
      * @return string
      */
     public function getId(): string
@@ -164,5 +174,25 @@ class OrderLine {
     public function setTariffNumber(?string $tariffNumber): void
     {
         $this->tariffNumber = $tariffNumber;
+    }
+
+    public function getSkuNumber(): ?string
+    {
+        return $this->skuNumber;
+    }
+
+    public function setSkuNumber(?string $skuNumber): void
+    {
+        $this->skuNumber = $skuNumber;
+    }
+
+    public function getEanNumber(): ?string
+    {
+        return $this->eanNumber;
+    }
+
+    public function setEanNumber(?string $eanNumber): void
+    {
+        $this->eanNumber = $eanNumber;
     }
 }
