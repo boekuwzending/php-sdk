@@ -31,12 +31,14 @@ class MeSerializer implements SerializerInterface
         $serializer = new Serializer();
 
         $me = new Me();
-
-//        $me->setId($data['id']);
-//        $me->setNumber($data['number']);
         $me->setName($data['name']);
 
-        $me->setRelation($serializer->deserialize($data['relation'], Relation::class));
+        if (!isset($data['relation'])) {
+            $me->setId($data['id']);
+            $me->setNumber($data['number']);
+        } else {
+            $me->setRelation($serializer->deserialize($data['relation'], Relation::class));
+        }
 
         return $me;
     }
